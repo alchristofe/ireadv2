@@ -1,0 +1,2677 @@
+{
+  "languages": [
+    {
+      "type": "english",
+      "name": "English",
+      "code": "en-US",
+      "categories": [
+        {
+          "id": "eng_vowels",
+          "type": "vowels",
+          "name": "Vowels",
+          "description": "Learn vowel sounds",
+          "units": [
+            {
+              "id": "eng_vowel_a",
+              "letter": "A",
+              "sound": "/a/",
+              "description": "Short A sound",
+              "audioAsset": "assets/audio/english/letter_A.mp3",
+              "categoryId": "eng_vowels",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "apple",
+                  "word": "Apple",
+                  "imageAsset": "assets/images/words/apple.png",
+                  "audioAsset": "assets/audio/english/apple.mp3",
+                  "phonetic": "ˈæp.əl",
+                  "language": "english"
+                },
+                {
+                  "id": "ant",
+                  "word": "Ant",
+                  "imageAsset": "assets/images/words/ant.png",
+                  "audioAsset": "assets/audio/english/ant.mp3",
+                  "phonetic": "ænt",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_vowel_e",
+              "letter": "E",
+              "sound": "/ɛ/",
+              "description": "Short E sound",
+              "categoryId": "eng_vowels",
+              "audioAsset": "assets/audio/english/letter_E.mp3",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "egg",
+                  "word": "Egg",
+                  "imageAsset": "assets/images/words/egg.png",
+                  "audioAsset": "assets/audio/english/egg.mp3",
+                  "phonetic": "ɛɡ",
+                  "language": "english"
+                },
+                {
+                  "id": "elephant",
+                  "word": "Elephant",
+                  "imageAsset": "assets/images/words/elephant.png",
+                  "audioAsset": "assets/audio/english/elephant.mp3",
+                  "phonetic": "ˈɛl.ɪ.fənt",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_vowel_i",
+              "letter": "I",
+              "sound": "/ɪ/",
+              "description": "Short I sound",
+              "categoryId": "eng_vowels",
+              "audioAsset": "assets/audio/english/letter_I.mp3",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "igloo",
+                  "word": "Igloo",
+                  "imageAsset": "assets/images/words/igloo.png",
+                  "audioAsset": "assets/audio/english/igloo.mp3",
+                  "phonetic": "ˈɪɡ.luː",
+                  "language": "english"
+                },
+                {
+                  "id": "pin",
+                  "word": "Pin",
+                  "imageAsset": "assets/images/words/pin.png",
+                  "audioAsset": "assets/audio/english/pin.mp3",
+                  "phonetic": "pɪn",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_vowel_o",
+              "letter": "O",
+              "sound": "/ɔ/",
+              "description": "Short O sound",
+              "categoryId": "eng_vowels",
+              "audioAsset": "assets/audio/english/letter_O.mp3",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "octopus",
+                  "word": "Octopus",
+                  "imageAsset": "assets/images/words/octopus.png",
+                  "audioAsset": "assets/audio/english/octopus.mp3",
+                  "phonetic": "ˈɒk.tə.pəs",
+                  "language": "english"
+                },
+                {
+                  "id": "orange",
+                  "word": "Orange",
+                  "imageAsset": "assets/images/words/orange.png",
+                  "audioAsset": "assets/audio/english/orange.mp3",
+                  "phonetic": "ˈɒr.ɪndʒ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_vowel_u",
+              "letter": "U",
+              "sound": "/ʌ/",
+              "description": "Short U sound",
+              "categoryId": "eng_vowels",
+              "audioAsset": "assets/audio/english/letter_U.mp3",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "umbrella",
+                  "word": "Umbrella",
+                  "imageAsset": "assets/images/words/umbrella.png",
+                  "audioAsset": "assets/audio/english/umbrella.mp3",
+                  "phonetic": "ʌmˈbrɛl.ə",
+                  "language": "english"
+                },
+                {
+                  "id": "up",
+                  "word": "Up",
+                  "imageAsset": "assets/images/words/up.png",
+                  "audioAsset": "assets/audio/english/up.mp3",
+                  "phonetic": "ʌp",
+                  "language": "english"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng_consonants",
+          "type": "consonants",
+          "name": "Consonants",
+          "description": "Learn consonant sounds",
+          "units": [
+            {
+              "id": "eng_consonant_b",
+              "letter": "B",
+              "sound": "/b/",
+              "description": "B sound",
+              "categoryId": "eng_consonants",
+              "audioAsset": "assets/audio/english/letter_B.mp3",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "ball",
+                  "word": "Ball",
+                  "imageAsset": "assets/images/words/ball.png",
+                  "audioAsset": "assets/audio/english/ball.mp3",
+                  "phonetic": "bɔːl",
+                  "language": "english"
+                },
+                {
+                  "id": "book",
+                  "word": "Book",
+                  "imageAsset": "assets/images/words/book.png",
+                  "audioAsset": "assets/audio/english/book.mp3",
+                  "phonetic": "bʊk",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_c",
+              "letter": "C",
+              "sound": "/k/",
+              "description": "C sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "cat",
+                  "word": "Cat",
+                  "imageAsset": "assets/images/words/cat.png",
+                  "audioAsset": "assets/audio/english/cat.mp3",
+                  "phonetic": "kæt",
+                  "language": "english"
+                },
+                {
+                  "id": "cup",
+                  "word": "Cup",
+                  "imageAsset": "assets/images/words/cup.png",
+                  "audioAsset": "assets/audio/english/cup.mp3",
+                  "phonetic": "kʌp",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_d",
+              "letter": "D",
+              "sound": "/d/",
+              "description": "D sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "dog",
+                  "word": "Dog",
+                  "imageAsset": "assets/images/words/dog.png",
+                  "audioAsset": "assets/audio/english/dog.mp3",
+                  "phonetic": "dɒɡ",
+                  "language": "english"
+                },
+                {
+                  "id": "duck",
+                  "word": "Duck",
+                  "imageAsset": "assets/images/words/duck.png",
+                  "audioAsset": "assets/audio/english/duck.mp3",
+                  "phonetic": "dʌk",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_f",
+              "letter": "F",
+              "sound": "/f/",
+              "description": "F sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "fish",
+                  "word": "Fish",
+                  "imageAsset": "assets/images/words/fish.png",
+                  "audioAsset": "assets/audio/english/fish.mp3",
+                  "phonetic": "fɪʃ",
+                  "language": "english"
+                },
+                {
+                  "id": "fox",
+                  "word": "Fox",
+                  "imageAsset": "assets/images/words/fox.png",
+                  "audioAsset": "assets/audio/english/fox.mp3",
+                  "phonetic": "fɒks",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_g",
+              "letter": "G",
+              "sound": "/g/",
+              "description": "G sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "goat",
+                  "word": "Goat",
+                  "imageAsset": "assets/images/words/goat.png",
+                  "audioAsset": "assets/audio/english/goat.mp3",
+                  "phonetic": "ɡəʊt",
+                  "language": "english"
+                },
+                {
+                  "id": "grapes",
+                  "word": "Grapes",
+                  "imageAsset": "assets/images/words/grapes.png",
+                  "audioAsset": "assets/audio/english/grapes.mp3",
+                  "phonetic": "ɡreɪps",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_h",
+              "letter": "H",
+              "sound": "/h/",
+              "description": "H sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "hat",
+                  "word": "Hat",
+                  "imageAsset": "assets/images/words/hat.png",
+                  "audioAsset": "assets/audio/english/hat.mp3",
+                  "phonetic": "hæt",
+                  "language": "english"
+                },
+                {
+                  "id": "house",
+                  "word": "House",
+                  "imageAsset": "assets/images/words/house.png",
+                  "audioAsset": "assets/audio/english/house.mp3",
+                  "phonetic": "haʊs",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_j",
+              "letter": "J",
+              "sound": "/dʒ/",
+              "description": "J sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "jar",
+                  "word": "Jar",
+                  "imageAsset": "assets/images/words/jar.png",
+                  "audioAsset": "assets/audio/english/jar.mp3",
+                  "phonetic": "dʒɑːr",
+                  "language": "english"
+                },
+                {
+                  "id": "jet",
+                  "word": "Jet",
+                  "imageAsset": "assets/images/words/jet.png",
+                  "audioAsset": "assets/audio/english/jet.mp3",
+                  "phonetic": "dʒɛt",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_k",
+              "letter": "K",
+              "sound": "/k/",
+              "description": "K sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "kite",
+                  "word": "Kite",
+                  "imageAsset": "assets/images/words/kite.png",
+                  "audioAsset": "assets/audio/english/kite.mp3",
+                  "phonetic": "kaɪt",
+                  "language": "english"
+                },
+                {
+                  "id": "king",
+                  "word": "King",
+                  "imageAsset": "assets/images/words/king.png",
+                  "audioAsset": "assets/audio/english/king.mp3",
+                  "phonetic": "kɪŋ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_l",
+              "letter": "L",
+              "sound": "/l/",
+              "description": "L sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "lion",
+                  "word": "Lion",
+                  "imageAsset": "assets/images/words/lion.png",
+                  "audioAsset": "assets/audio/english/lion.mp3",
+                  "phonetic": "ˈlaɪ.ən",
+                  "language": "english"
+                },
+                {
+                  "id": "lamp",
+                  "word": "Lamp",
+                  "imageAsset": "assets/images/words/lamp.png",
+                  "audioAsset": "assets/audio/english/lamp.mp3",
+                  "phonetic": "læmp",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_m",
+              "letter": "M",
+              "sound": "/m/",
+              "description": "M sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "moon",
+                  "word": "Moon",
+                  "imageAsset": "assets/images/words/moon.png",
+                  "audioAsset": "assets/audio/english/moon.mp3",
+                  "phonetic": "muːn",
+                  "language": "english"
+                },
+                {
+                  "id": "mouse",
+                  "word": "Mouse",
+                  "imageAsset": "assets/images/words/mouse.png",
+                  "audioAsset": "assets/audio/english/mouse.mp3",
+                  "phonetic": "maʊs",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_n",
+              "letter": "N",
+              "sound": "/n/",
+              "description": "N sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "nest",
+                  "word": "Nest",
+                  "imageAsset": "assets/images/words/nest.png",
+                  "audioAsset": "assets/audio/english/nest.mp3",
+                  "phonetic": "nɛst",
+                  "language": "english"
+                },
+                {
+                  "id": "net",
+                  "word": "Net",
+                  "imageAsset": "assets/images/words/net.png",
+                  "audioAsset": "assets/audio/english/net.mp3",
+                  "phonetic": "nɛt",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_p",
+              "letter": "P",
+              "sound": "/p/",
+              "description": "P sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "pen",
+                  "word": "Pen",
+                  "imageAsset": "assets/images/words/pen.png",
+                  "audioAsset": "assets/audio/english/pen.mp3",
+                  "phonetic": "pɛn",
+                  "language": "english"
+                },
+                {
+                  "id": "pig",
+                  "word": "Pig",
+                  "imageAsset": "assets/images/words/pig.png",
+                  "audioAsset": "assets/audio/english/pig.mp3",
+                  "phonetic": "pɪɡ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_q",
+              "letter": "Q",
+              "sound": "/kw/",
+              "description": "Q sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "queen",
+                  "word": "Queen",
+                  "imageAsset": "assets/images/words/queen.png",
+                  "audioAsset": "assets/audio/english/queen.mp3",
+                  "phonetic": "kwiːn",
+                  "language": "english"
+                },
+                {
+                  "id": "quilt",
+                  "word": "Quilt",
+                  "imageAsset": "assets/images/words/quilt.png",
+                  "audioAsset": "assets/audio/english/quilt.mp3",
+                  "phonetic": "kwɪlt",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_r",
+              "letter": "R",
+              "sound": "/r/",
+              "description": "R sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "rabbit",
+                  "word": "Rabbit",
+                  "imageAsset": "assets/images/words/rabbit.png",
+                  "audioAsset": "assets/audio/english/rabbit.mp3",
+                  "phonetic": "ˈræb.ɪt",
+                  "language": "english"
+                },
+                {
+                  "id": "rain",
+                  "word": "Rain",
+                  "imageAsset": "assets/images/words/rain.png",
+                  "audioAsset": "assets/audio/english/rain.mp3",
+                  "phonetic": "reɪn",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_s",
+              "letter": "S",
+              "sound": "/s/",
+              "description": "S sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "sun",
+                  "word": "Sun",
+                  "imageAsset": "assets/images/words/sun.png",
+                  "audioAsset": "assets/audio/english/sun.mp3",
+                  "phonetic": "sʌn",
+                  "language": "english"
+                },
+                {
+                  "id": "star",
+                  "word": "Star",
+                  "imageAsset": "assets/images/words/star.png",
+                  "audioAsset": "assets/audio/english/star.mp3",
+                  "phonetic": "stɑːr",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_t",
+              "letter": "T",
+              "sound": "/t/",
+              "description": "T sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "tree",
+                  "word": "Tree",
+                  "imageAsset": "assets/images/words/tree.png",
+                  "audioAsset": "assets/audio/english/tree.mp3",
+                  "phonetic": "triː",
+                  "language": "english"
+                },
+                {
+                  "id": "tiger",
+                  "word": "Tiger",
+                  "imageAsset": "assets/images/words/tiger.png",
+                  "audioAsset": "assets/audio/english/tiger.mp3",
+                  "phonetic": "ˈtaɪ.ɡər",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_v",
+              "letter": "V",
+              "sound": "/v/",
+              "description": "V sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "van",
+                  "word": "Van",
+                  "imageAsset": "assets/images/words/van.png",
+                  "audioAsset": "assets/audio/english/van.mp3",
+                  "phonetic": "væn",
+                  "language": "english"
+                },
+                {
+                  "id": "vest",
+                  "word": "Vest",
+                  "imageAsset": "assets/images/words/vest.png",
+                  "audioAsset": "assets/audio/english/vest.mp3",
+                  "phonetic": "vɛst",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_w",
+              "letter": "W",
+              "sound": "/w/",
+              "description": "W sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "water",
+                  "word": "Water",
+                  "imageAsset": "assets/images/words/water.png",
+                  "audioAsset": "assets/audio/english/water.mp3",
+                  "phonetic": "ˈwɔː.tər",
+                  "language": "english"
+                },
+                {
+                  "id": "watch",
+                  "word": "Watch",
+                  "imageAsset": "assets/images/words/watch.png",
+                  "audioAsset": "assets/audio/english/watch.mp3",
+                  "phonetic": "wɒtʃ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_x",
+              "letter": "X",
+              "sound": "/ks/",
+              "description": "X sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "xray",
+                  "word": "X-ray",
+                  "imageAsset": "assets/images/words/x-ray.png",
+                  "audioAsset": "assets/audio/english/xray.mp3",
+                  "phonetic": "ˈɛks.reɪ",
+                  "language": "english"
+                },
+                {
+                  "id": "box",
+                  "word": "Box",
+                  "imageAsset": "assets/images/words/box.png",
+                  "audioAsset": "assets/audio/english/box.mp3",
+                  "phonetic": "bɒks",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_y",
+              "letter": "Y",
+              "sound": "/j/",
+              "description": "Y sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "yoyo",
+                  "word": "Yo-yo",
+                  "imageAsset": "assets/images/words/yoyo.png",
+                  "audioAsset": "assets/audio/english/yoyo.mp3",
+                  "phonetic": "ˈjoʊ.joʊ",
+                  "language": "english"
+                },
+                {
+                  "id": "yellow",
+                  "word": "Yellow",
+                  "imageAsset": "assets/images/words/yellow.png",
+                  "audioAsset": "assets/audio/english/yellow.mp3",
+                  "phonetic": "ˈjɛl.əʊ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_consonant_z",
+              "letter": "Z",
+              "sound": "/z/",
+              "description": "Z sound",
+              "categoryId": "eng_consonants",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "zebra",
+                  "word": "Zebra",
+                  "imageAsset": "assets/images/words/zebra.png",
+                  "audioAsset": "assets/audio/english/zebra.mp3",
+                  "phonetic": "ˈzɛb.rə",
+                  "language": "english"
+                },
+                {
+                  "id": "zoo",
+                  "word": "Zoo",
+                  "imageAsset": "assets/images/words/zoo.png",
+                  "audioAsset": "assets/audio/english/zoo.mp3",
+                  "phonetic": "zuː",
+                  "language": "english"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "eng_blends",
+          "type": "blends",
+          "name": "Consonant Blends",
+          "description": "Learn consonant blends",
+          "units": [
+            {
+              "id": "eng_blend_bl",
+              "letter": "Bl",
+              "sound": "/bl/",
+              "description": "Bl blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "blue",
+                  "word": "Blue",
+                  "imageAsset": "assets/images/words/blue.png",
+                  "audioAsset": "assets/audio/english/blue.mp3",
+                  "phonetic": "bluː",
+                  "language": "english"
+                },
+                {
+                  "id": "block",
+                  "word": "Block",
+                  "imageAsset": "assets/images/words/block.png",
+                  "audioAsset": "assets/audio/english/block.mp3",
+                  "phonetic": "blɒk",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_cl",
+              "letter": "Cl",
+              "sound": "/kl/",
+              "description": "Cl blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "cloud",
+                  "word": "Cloud",
+                  "imageAsset": "assets/images/words/cloud.png",
+                  "audioAsset": "assets/audio/english/cloud.mp3",
+                  "phonetic": "klaʊd",
+                  "language": "english"
+                },
+                {
+                  "id": "clap",
+                  "word": "Clap",
+                  "imageAsset": "assets/images/words/clap.png",
+                  "audioAsset": "assets/audio/english/clap.mp3",
+                  "phonetic": "klæp",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_fl",
+              "letter": "Fl",
+              "sound": "/fl/",
+              "description": "Fl blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "flag",
+                  "word": "Flag",
+                  "imageAsset": "assets/images/words/flag.png",
+                  "audioAsset": "assets/audio/english/flag.mp3",
+                  "phonetic": "flæɡ",
+                  "language": "english"
+                },
+                {
+                  "id": "flower",
+                  "word": "Flower",
+                  "imageAsset": "assets/images/words/flower.png",
+                  "audioAsset": "assets/audio/english/flower.mp3",
+                  "phonetic": "ˈflaʊ.ər",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_gl",
+              "letter": "Gl",
+              "sound": "/ɡl/",
+              "description": "Gl blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "glass",
+                  "word": "Glass",
+                  "imageAsset": "assets/images/words/glass.png",
+                  "audioAsset": "assets/audio/english/glass.mp3",
+                  "phonetic": "ɡlɑːs",
+                  "language": "english"
+                },
+                {
+                  "id": "glove",
+                  "word": "Glove",
+                  "imageAsset": "assets/images/words/glove.png",
+                  "audioAsset": "assets/audio/english/glove.mp3",
+                  "phonetic": "ɡlʌv",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_pl",
+              "letter": "Pl",
+              "sound": "/pl/",
+              "description": "Pl blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "plate",
+                  "word": "Plate",
+                  "imageAsset": "assets/images/words/plate.png",
+                  "audioAsset": "assets/audio/english/plate.mp3",
+                  "phonetic": "pleɪt",
+                  "language": "english"
+                },
+                {
+                  "id": "plant",
+                  "word": "Plant",
+                  "imageAsset": "assets/images/words/plant.png",
+                  "audioAsset": "assets/audio/english/plant.mp3",
+                  "phonetic": "plɑːnt",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_sl",
+              "letter": "Sl",
+              "sound": "/sl/",
+              "description": "Sl blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "slide",
+                  "word": "Slide",
+                  "imageAsset": "assets/images/words/slide.png",
+                  "audioAsset": "assets/audio/english/slide.mp3",
+                  "phonetic": "slaɪd",
+                  "language": "english"
+                },
+                {
+                  "id": "sleep",
+                  "word": "Sleep",
+                  "imageAsset": "assets/images/words/sleep.png",
+                  "audioAsset": "assets/audio/english/sleep.mp3",
+                  "phonetic": "sliːp",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_br",
+              "letter": "Br",
+              "sound": "/br/",
+              "description": "Br blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "bread",
+                  "word": "Bread",
+                  "imageAsset": "assets/images/words/bread.png",
+                  "audioAsset": "assets/audio/english/bread.mp3",
+                  "phonetic": "brɛd",
+                  "language": "english"
+                },
+                {
+                  "id": "bridge",
+                  "word": "Bridge",
+                  "imageAsset": "assets/images/words/bridge.png",
+                  "audioAsset": "assets/audio/english/bridge.mp3",
+                  "phonetic": "brɪdʒ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_cr",
+              "letter": "Cr",
+              "sound": "/kr/",
+              "description": "Cr blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "crab",
+                  "word": "Crab",
+                  "imageAsset": "assets/images/words/crab.png",
+                  "audioAsset": "assets/audio/english/crab.mp3",
+                  "phonetic": "kræb",
+                  "language": "english"
+                },
+                {
+                  "id": "crown",
+                  "word": "Crown",
+                  "imageAsset": "assets/images/words/crown.png",
+                  "audioAsset": "assets/audio/english/crown.mp3",
+                  "phonetic": "kraʊn",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_dr",
+              "letter": "Dr",
+              "sound": "/dr/",
+              "description": "Dr blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "drum",
+                  "word": "Drum",
+                  "imageAsset": "assets/images/words/drum.png",
+                  "audioAsset": "assets/audio/english/drum.mp3",
+                  "phonetic": "drʌm",
+                  "language": "english"
+                },
+                {
+                  "id": "dragon",
+                  "word": "Dragon",
+                  "imageAsset": "assets/images/words/dragon.png",
+                  "audioAsset": "assets/audio/english/dragon.mp3",
+                  "phonetic": "ˈdræɡ.ən",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_fr",
+              "letter": "Fr",
+              "sound": "/fr/",
+              "description": "Fr blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "frog",
+                  "word": "Frog",
+                  "imageAsset": "assets/images/words/frog.png",
+                  "audioAsset": "assets/audio/english/frog.mp3",
+                  "phonetic": "frɒɡ",
+                  "language": "english"
+                },
+                {
+                  "id": "fruit",
+                  "word": "Fruit",
+                  "imageAsset": "assets/images/words/fruit.png",
+                  "audioAsset": "assets/audio/english/fruit.mp3",
+                  "phonetic": "fruːt",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_gr",
+              "letter": "Gr",
+              "sound": "/ɡr/",
+              "description": "Gr blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "grass",
+                  "word": "Grass",
+                  "imageAsset": "assets/images/words/grass.png",
+                  "audioAsset": "assets/audio/english/grass.mp3",
+                  "phonetic": "ɡrɑːs",
+                  "language": "english"
+                },
+                {
+                  "id": "grape",
+                  "word": "Grape",
+                  "imageAsset": "assets/images/words/grapes.png",
+                  "audioAsset": "assets/audio/english/grape.mp3",
+                  "phonetic": "ɡreɪp",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_pr",
+              "letter": "Pr",
+              "sound": "/pr/",
+              "description": "Pr blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "present",
+                  "word": "Present",
+                  "imageAsset": "assets/images/words/present.png",
+                  "audioAsset": "assets/audio/english/present.mp3",
+                  "phonetic": "ˈprɛz.ənt",
+                  "language": "english"
+                },
+                {
+                  "id": "prince",
+                  "word": "Prince",
+                  "imageAsset": "assets/images/words/prince.png",
+                  "audioAsset": "assets/audio/english/prince.mp3",
+                  "phonetic": "prɪns",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_tr",
+              "letter": "Tr",
+              "sound": "/tr/",
+              "description": "Tr blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "train",
+                  "word": "Train",
+                  "imageAsset": "assets/images/words/train.png",
+                  "audioAsset": "assets/audio/english/train.mp3",
+                  "phonetic": "treɪn",
+                  "language": "english"
+                },
+                {
+                  "id": "tree_blend",
+                  "word": "Tree",
+                  "imageAsset": "assets/images/words/tree.png",
+                  "audioAsset": "assets/audio/english/tree.mp3",
+                  "phonetic": "triː",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_sc",
+              "letter": "Sc",
+              "sound": "/sk/",
+              "description": "Sc blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "scarf",
+                  "word": "Scarf",
+                  "imageAsset": "assets/images/words/scarf.png",
+                  "audioAsset": "assets/audio/english/scarf.mp3",
+                  "phonetic": "skɑːrf",
+                  "language": "english"
+                },
+                {
+                  "id": "school",
+                  "word": "School",
+                  "imageAsset": "assets/images/words/school.png",
+                  "audioAsset": "assets/audio/english/school.mp3",
+                  "phonetic": "skuːl",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_sk",
+              "letter": "Sk",
+              "sound": "/sk/",
+              "description": "Sk blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "skate",
+                  "word": "Skate",
+                  "imageAsset": "assets/images/words/skate.png",
+                  "audioAsset": "assets/audio/english/skate.mp3",
+                  "phonetic": "skeɪt",
+                  "language": "english"
+                },
+                {
+                  "id": "sky",
+                  "word": "Sky",
+                  "imageAsset": "assets/images/words/sky.png",
+                  "audioAsset": "assets/audio/english/sky.mp3",
+                  "phonetic": "skaɪ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_sm",
+              "letter": "Sm",
+              "sound": "/sm/",
+              "description": "Sm blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "smile",
+                  "word": "Smile",
+                  "imageAsset": "assets/images/words/smile.png",
+                  "audioAsset": "assets/audio/english/smile.mp3",
+                  "phonetic": "smaɪl",
+                  "language": "english"
+                },
+                {
+                  "id": "smoke",
+                  "word": "Smoke",
+                  "imageAsset": "assets/images/words/smoke.png",
+                  "audioAsset": "assets/audio/english/smoke.mp3",
+                  "phonetic": "smoʊk",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_sn",
+              "letter": "Sn",
+              "sound": "/sn/",
+              "description": "Sn blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "snake",
+                  "word": "Snake",
+                  "imageAsset": "assets/images/words/snake.png",
+                  "audioAsset": "assets/audio/english/snake.mp3",
+                  "phonetic": "sneɪk",
+                  "language": "english"
+                },
+                {
+                  "id": "snow",
+                  "word": "Snow",
+                  "imageAsset": "assets/images/words/snow.png",
+                  "audioAsset": "assets/audio/english/snow.mp3",
+                  "phonetic": "snoʊ",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_sp",
+              "letter": "Sp",
+              "sound": "/sp/",
+              "description": "Sp blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "spoon",
+                  "word": "Spoon",
+                  "imageAsset": "assets/images/words/spoon.png",
+                  "audioAsset": "assets/audio/english/spoon.mp3",
+                  "phonetic": "spuːn",
+                  "language": "english"
+                },
+                {
+                  "id": "spider",
+                  "word": "Spider",
+                  "imageAsset": "assets/images/words/spider.png",
+                  "audioAsset": "assets/audio/english/spider.mp3",
+                  "phonetic": "ˈspaɪ.dər",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_st",
+              "letter": "St",
+              "sound": "/st/",
+              "description": "St blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "star_blend",
+                  "word": "Star",
+                  "imageAsset": "assets/images/words/star.png",
+                  "audioAsset": "assets/audio/english/star.mp3",
+                  "phonetic": "stɑːr",
+                  "language": "english"
+                },
+                {
+                  "id": "stop",
+                  "word": "Stop",
+                  "imageAsset": "assets/images/words/stop.png",
+                  "audioAsset": "assets/audio/english/stop.mp3",
+                  "phonetic": "stɒp",
+                  "language": "english"
+                }
+              ]
+            },
+            {
+              "id": "eng_blend_sw",
+              "letter": "Sw",
+              "sound": "/sw/",
+              "description": "Sw blend",
+              "categoryId": "eng_blends",
+              "language": "english",
+              "examples": [
+                {
+                  "id": "swing",
+                  "word": "Swing",
+                  "imageAsset": "assets/images/words/swing.png",
+                  "audioAsset": "assets/audio/english/swing.mp3",
+                  "phonetic": "swɪŋ",
+                  "language": "english"
+                },
+                {
+                  "id": "swan",
+                  "word": "Swan",
+                  "imageAsset": "assets/images/words/swan.png",
+                  "audioAsset": "assets/audio/english/swan.mp3",
+                  "phonetic": "swɒn",
+                  "language": "english"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "filipino",
+      "name": "Filipino",
+      "code": "fil-PH",
+      "categories": [
+        {
+          "id": "fil_vowels",
+          "type": "vowels",
+          "name": "Patinig",
+          "description": "Matuto ng mga patinig",
+          "units": [
+            {
+              "id": "fil_vowel_a",
+              "letter": "A",
+              "sound": "/a/",
+              "description": "Tunog ng A",
+              "categoryId": "fil_vowels",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "aso",
+                  "word": "Aso",
+                  "imageAsset": "assets/images/words/aso.png",
+                  "audioAsset": "assets/audio/filipino/aso.mp3",
+                  "phonetic": "ˈa.so",
+                  "language": "filipino"
+                },
+                {
+                  "id": "araw",
+                  "word": "Araw",
+                  "imageAsset": "assets/images/words/araw.png",
+                  "audioAsset": "assets/audio/filipino/araw.mp3",
+                  "phonetic": "ˈa.ɾaw",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_vowel_e",
+              "letter": "E",
+              "sound": "/ɛ/",
+              "description": "Tunog ng E",
+              "categoryId": "fil_vowels",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "eroplano",
+                  "word": "Eroplano",
+                  "imageAsset": "assets/images/words/eroplano.png",
+                  "audioAsset": "assets/audio/filipino/eroplano.mp3",
+                  "phonetic": "ɛ.ɾo.pla.no",
+                  "language": "filipino"
+                },
+                {
+                  "id": "elepante",
+                  "word": "Elepante",
+                  "imageAsset": "assets/images/words/elepante.png",
+                  "audioAsset": "assets/audio/filipino/elepante.mp3",
+                  "phonetic": "ɛ.lɛ.pan.tɛ",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_vowel_i",
+              "letter": "I",
+              "sound": "/i/",
+              "description": "Tunog ng I",
+              "categoryId": "fil_vowels",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "ibon",
+                  "word": "Ibon",
+                  "imageAsset": "assets/images/words/ibon.png",
+                  "audioAsset": "assets/audio/filipino/ibon.mp3",
+                  "phonetic": "ˈi.bon",
+                  "language": "filipino"
+                },
+                {
+                  "id": "isda",
+                  "word": "Isda",
+                  "imageAsset": "assets/images/words/isda.png",
+                  "audioAsset": "assets/audio/filipino/isda.mp3",
+                  "phonetic": "ɪs.da",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_vowel_o",
+              "letter": "O",
+              "sound": "/o/",
+              "description": "Tunog ng O",
+              "categoryId": "fil_vowels",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "oso",
+                  "word": "Oso",
+                  "imageAsset": "assets/images/words/oso.png",
+                  "audioAsset": "assets/audio/filipino/oso.mp3",
+                  "phonetic": "ˈo.so",
+                  "language": "filipino"
+                },
+                {
+                  "id": "orasan",
+                  "word": "Orasan",
+                  "imageAsset": "assets/images/words/orasan.png",
+                  "audioAsset": "assets/audio/filipino/orasan.mp3",
+                  "phonetic": "o.ɾa.san",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_vowel_u",
+              "letter": "U",
+              "sound": "ohh",
+              "description": "Tunog ng U",
+              "categoryId": "fil_vowels",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "ulan",
+                  "word": "Ulan",
+                  "imageAsset": "assets/images/words/ulan.png",
+                  "audioAsset": "assets/audio/filipino/ulan.mp3",
+                  "phonetic": "u.lan",
+                  "language": "filipino"
+                },
+                {
+                  "id": "ubas",
+                  "word": "Ubas",
+                  "imageAsset": "assets/images/words/ubas.png",
+                  "audioAsset": "assets/audio/filipino/ubas.mp3",
+                  "phonetic": "u.bas",
+                  "language": "filipino"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fil_consonants",
+          "type": "consonants",
+          "name": "Katinig",
+          "description": "Matuto ng mga katinig",
+          "units": [
+            {
+              "id": "fil_consonant_b",
+              "letter": "B",
+              "sound": "/b/",
+              "description": "Tunog ng B",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "bola",
+                  "word": "Bola",
+                  "imageAsset": "assets/images/words/bola.png",
+                  "audioAsset": "assets/audio/filipino/bola.mp3",
+                  "phonetic": "ˈbo.la",
+                  "language": "filipino"
+                },
+                {
+                  "id": "bahay",
+                  "word": "Bahay",
+                  "imageAsset": "assets/images/words/bahay.png",
+                  "audioAsset": "assets/audio/filipino/bahay.mp3",
+                  "phonetic": "ˈba.haɪ",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_k",
+              "letter": "K",
+              "sound": "/k/",
+              "description": "Tunog ng K",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "kamay",
+                  "word": "Kamay",
+                  "imageAsset": "assets/images/words/kamay.png",
+                  "audioAsset": "assets/audio/filipino/kamay.mp3",
+                  "phonetic": "ka.maɪ",
+                  "language": "filipino"
+                },
+                {
+                  "id": "keso",
+                  "word": "Keso",
+                  "imageAsset": "assets/images/words/keso.png",
+                  "audioAsset": "assets/audio/filipino/keso.mp3",
+                  "phonetic": "kɛ.so",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_d",
+              "letter": "D",
+              "sound": "/d/",
+              "description": "Tunog ng D",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "daga",
+                  "word": "Daga",
+                  "imageAsset": "assets/images/words/daga.png",
+                  "audioAsset": "assets/audio/filipino/daga.mp3",
+                  "phonetic": "da.ɡa",
+                  "language": "filipino"
+                },
+                {
+                  "id": "dahon",
+                  "word": "Dahon",
+                  "imageAsset": "assets/images/words/dahon.png",
+                  "audioAsset": "assets/audio/filipino/dahon.mp3",
+                  "phonetic": "da.hon",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_g",
+              "letter": "G",
+              "sound": "/g/",
+              "description": "Tunog ng G",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "gagamba",
+                  "word": "Gagamba",
+                  "imageAsset": "assets/images/words/gagamba.png",
+                  "audioAsset": "assets/audio/filipino/gagamba.mp3",
+                  "phonetic": "ɡa.ɡam.ba",
+                  "language": "filipino"
+                },
+                {
+                  "id": "gatas",
+                  "word": "Gatas",
+                  "imageAsset": "assets/images/words/gatas.png",
+                  "audioAsset": "assets/audio/filipino/gatas.mp3",
+                  "phonetic": "ɡa.tas",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_h",
+              "letter": "H",
+              "sound": "/h/",
+              "description": "Tunog ng H",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "halaman",
+                  "word": "Halaman",
+                  "imageAsset": "assets/images/words/halaman.png",
+                  "audioAsset": "assets/audio/filipino/halaman.mp3",
+                  "phonetic": "ha.la.man",
+                  "language": "filipino"
+                },
+                {
+                  "id": "holen",
+                  "word": "Holen",
+                  "imageAsset": "assets/images/words/holen.png",
+                  "audioAsset": "assets/audio/filipino/holen.mp3",
+                  "phonetic": "ho.lɛn",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_l",
+              "letter": "L",
+              "sound": "/l/",
+              "description": "Tunog ng L",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "lapis",
+                  "word": "Lapis",
+                  "imageAsset": "assets/images/words/lapis.png",
+                  "audioAsset": "assets/audio/filipino/lapis.mp3",
+                  "phonetic": "la.pɪs",
+                  "language": "filipino"
+                },
+                {
+                  "id": "laso",
+                  "word": "Laso",
+                  "imageAsset": "assets/images/words/laso.png",
+                  "audioAsset": "assets/audio/filipino/laso.mp3",
+                  "phonetic": "la.so",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_m",
+              "letter": "M",
+              "sound": "/m/",
+              "description": "Tunog ng M",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "manok",
+                  "word": "Manok",
+                  "imageAsset": "assets/images/words/manok.png",
+                  "audioAsset": "assets/audio/filipino/manok.mp3",
+                  "phonetic": "ma.nok",
+                  "language": "filipino"
+                },
+                {
+                  "id": "mata",
+                  "word": "Mata",
+                  "imageAsset": "assets/images/words/mata.png",
+                  "audioAsset": "assets/audio/filipino/mata.mp3",
+                  "phonetic": "ma.ta",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_n",
+              "letter": "N",
+              "sound": "/n/",
+              "description": "Tunog ng N",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "nanay",
+                  "word": "Nanay",
+                  "imageAsset": "assets/images/words/nanay.png",
+                  "audioAsset": "assets/audio/filipino/nanay.mp3",
+                  "phonetic": "na.naɪ",
+                  "language": "filipino"
+                },
+                {
+                  "id": "niyog",
+                  "word": "Niyog",
+                  "imageAsset": "assets/images/words/niyog.png",
+                  "audioAsset": "assets/audio/filipino/niyog.mp3",
+                  "phonetic": "ni.joɡ",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_ng",
+              "letter": "Ng",
+              "sound": "/ŋ/",
+              "description": "Tunog ng Ng",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "ngipin",
+                  "word": "Ngipin",
+                  "imageAsset": "assets/images/words/ngipin.png",
+                  "audioAsset": "assets/audio/filipino/ngipin.mp3",
+                  "phonetic": "ŋi.pɪn",
+                  "language": "filipino"
+                },
+                {
+                  "id": "ngayon",
+                  "word": "Ngayon",
+                  "imageAsset": "assets/images/words/ngayon.png",
+                  "audioAsset": "assets/audio/filipino/ngayon.mp3",
+                  "phonetic": "ŋa.jon",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_p",
+              "letter": "P",
+              "sound": "/p/",
+              "description": "Tunog ng P",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "pusa",
+                  "word": "Pusa",
+                  "imageAsset": "assets/images/words/pusa.png",
+                  "audioAsset": "assets/audio/filipino/pusa.mp3",
+                  "phonetic": "pu.sa",
+                  "language": "filipino"
+                },
+                {
+                  "id": "pato",
+                  "word": "Pato",
+                  "imageAsset": "assets/images/words/pato.png",
+                  "audioAsset": "assets/audio/filipino/pato.mp3",
+                  "phonetic": "pa.to",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_r",
+              "letter": "R",
+              "sound": "/r/",
+              "description": "Tunog ng R",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "relos",
+                  "word": "Relos",
+                  "imageAsset": "assets/images/words/relos.png",
+                  "audioAsset": "assets/audio/filipino/relos.mp3",
+                  "phonetic": "ɾɛ.los",
+                  "language": "filipino"
+                },
+                {
+                  "id": "rosas",
+                  "word": "Rosas",
+                  "imageAsset": "assets/images/words/rosas.png",
+                  "audioAsset": "assets/audio/filipino/rosas.mp3",
+                  "phonetic": "ɾo.sas",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_s",
+              "letter": "S",
+              "sound": "/s/",
+              "description": "Tunog ng S",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "saging",
+                  "word": "Saging",
+                  "imageAsset": "assets/images/words/saging.png",
+                  "audioAsset": "assets/audio/filipino/saging.mp3",
+                  "phonetic": "sa.ɡɪŋ",
+                  "language": "filipino"
+                },
+                {
+                  "id": "sapatos",
+                  "word": "Sapatos",
+                  "imageAsset": "assets/images/words/sapatos.png",
+                  "audioAsset": "assets/audio/filipino/sapatos.mp3",
+                  "phonetic": "sa.pa.tos",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_t",
+              "letter": "T",
+              "sound": "/t/",
+              "description": "Tunog ng T",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "tatay",
+                  "word": "Tatay",
+                  "imageAsset": "assets/images/words/tatay.png",
+                  "audioAsset": "assets/audio/filipino/tatay.mp3",
+                  "phonetic": "ta.taɪ",
+                  "language": "filipino"
+                },
+                {
+                  "id": "tubig",
+                  "word": "Tubig",
+                  "imageAsset": "assets/images/words/tubig.png",
+                  "audioAsset": "assets/audio/filipino/tubig.mp3",
+                  "phonetic": "tu.bɪɡ",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_w",
+              "letter": "W",
+              "sound": "/w/",
+              "description": "Tunog ng W",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "watawat",
+                  "word": "Watawat",
+                  "imageAsset": "assets/images/words/watawat.png",
+                  "audioAsset": "assets/audio/filipino/watawat.mp3",
+                  "phonetic": "wa.ta.wat",
+                  "language": "filipino"
+                },
+                {
+                  "id": "walis",
+                  "word": "Walis",
+                  "imageAsset": "assets/images/words/walis.png",
+                  "audioAsset": "assets/audio/filipino/walis.mp3",
+                  "phonetic": "wa.lɪs",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_consonant_y",
+              "letter": "Y",
+              "sound": "/j/",
+              "description": "Tunog ng Y",
+              "categoryId": "fil_consonants",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "yoyo_fil",
+                  "word": "Yoyo",
+                  "imageAsset": "assets/images/words/yoyo.png",
+                  "audioAsset": "assets/audio/filipino/yoyo.mp3",
+                  "phonetic": "jo.jo",
+                  "language": "filipino"
+                },
+                {
+                  "id": "yelo",
+                  "word": "Yelo",
+                  "imageAsset": "assets/images/words/yelo.png",
+                  "audioAsset": "assets/audio/filipino/yelo.mp3",
+                  "phonetic": "jɛ.lo",
+                  "language": "filipino"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fil_blends",
+          "type": "blends",
+          "name": "Kambal-katinig",
+          "description": "Matuto ng mga kambal-katinig",
+          "units": [
+            {
+              "id": "fil_blend_kr",
+              "letter": "Kr",
+              "sound": "/kɾ/",
+              "description": "Kambal-katinig na Kr",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "krus",
+                  "word": "Krus",
+                  "imageAsset": "assets/images/words/krus.png",
+                  "audioAsset": "assets/audio/filipino/krus.mp3",
+                  "phonetic": "kɾus",
+                  "language": "filipino"
+                },
+                {
+                  "id": "krayola",
+                  "word": "Krayola",
+                  "imageAsset": "assets/images/words/krayola.png",
+                  "audioAsset": "assets/audio/filipino/krayola.mp3",
+                  "phonetic": "kɾa.jo.la",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_blend_pl",
+              "letter": "Pl",
+              "sound": "/pl/",
+              "description": "Kambal-katinig na Pl",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "plato",
+                  "word": "Plato",
+                  "imageAsset": "assets/images/words/plato.png",
+                  "audioAsset": "assets/audio/filipino/plato.mp3",
+                  "phonetic": "pla.to",
+                  "language": "filipino"
+                },
+                {
+                  "id": "plancha",
+                  "word": "Plancha",
+                  "imageAsset": "assets/images/words/plancha.png",
+                  "audioAsset": "assets/audio/filipino/plancha.mp3",
+                  "phonetic": "plan.tʃa",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_blend_tr",
+              "letter": "Tr",
+              "sound": "/tɾ/",
+              "description": "Kambal-katinig na Tr",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "trak",
+                  "word": "Trak",
+                  "imageAsset": "assets/images/words/trak.png",
+                  "audioAsset": "assets/audio/filipino/trak.mp3",
+                  "phonetic": "tɾak",
+                  "language": "filipino"
+                },
+                {
+                  "id": "trumpo",
+                  "word": "Trumpo",
+                  "imageAsset": "assets/images/words/trumpo.png",
+                  "audioAsset": "assets/audio/filipino/trumpo.mp3",
+                  "phonetic": "tɾum.po",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_blend_ts",
+              "letter": "Ts",
+              "sound": "/tʃ/",
+              "description": "Kambal-katinig na Ts",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "tsinelas",
+                  "word": "Tsinelas",
+                  "imageAsset": "assets/images/words/tsinelas.png",
+                  "audioAsset": "assets/audio/filipino/tsinelas.mp3",
+                  "phonetic": "tʃi.nɛ.las",
+                  "language": "filipino"
+                },
+                {
+                  "id": "tsokolate",
+                  "word": "Tsokolate",
+                  "imageAsset": "assets/images/words/tsokolate.png",
+                  "audioAsset": "assets/audio/filipino/tsokolate.mp3",
+                  "phonetic": "tʃo.ko.la.tɛ",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_blend_br",
+              "letter": "Br",
+              "sound": "/bɾ/",
+              "description": "Kambal-katinig na Br",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "braso",
+                  "word": "Braso",
+                  "imageAsset": "assets/images/words/braso.png",
+                  "audioAsset": "assets/audio/filipino/braso.mp3",
+                  "phonetic": "bɾa.so",
+                  "language": "filipino"
+                },
+                {
+                  "id": "bruha",
+                  "word": "Bruha",
+                  "imageAsset": "assets/images/words/bruha.png",
+                  "audioAsset": "assets/audio/filipino/bruha.mp3",
+                  "phonetic": "bɾu.ha",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_blend_dr",
+              "letter": "Dr",
+              "sound": "/dɾ/",
+              "description": "Kambal-katinig na Dr",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "dram",
+                  "word": "Dram",
+                  "imageAsset": "assets/images/words/dram.png",
+                  "audioAsset": "assets/audio/filipino/dram.mp3",
+                  "phonetic": "dɾam",
+                  "language": "filipino"
+                },
+                {
+                  "id": "drama",
+                  "word": "Drama",
+                  "imageAsset": "assets/images/words/drama.png",
+                  "audioAsset": "assets/audio/filipino/drama.mp3",
+                  "phonetic": "dɾa.ma",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_blend_gr",
+              "letter": "Gr",
+              "sound": "/ɡɾ/",
+              "description": "Kambal-katinig na Gr",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "grasa",
+                  "word": "Grasa",
+                  "imageAsset": "assets/images/words/grasa.png",
+                  "audioAsset": "assets/audio/filipino/grasa.mp3",
+                  "phonetic": "ɡɾa.sa",
+                  "language": "filipino"
+                },
+                {
+                  "id": "grip",
+                  "word": "Grip",
+                  "imageAsset": "assets/images/words/grip.png",
+                  "audioAsset": "assets/audio/filipino/grip.mp3",
+                  "phonetic": "ɡɾɪp",
+                  "language": "filipino"
+                }
+              ]
+            },
+            {
+              "id": "fil_blend_pr",
+              "letter": "Pr",
+              "sound": "/pɾ/",
+              "description": "Kambal-katinig na Pr",
+              "categoryId": "fil_blends",
+              "language": "filipino",
+              "examples": [
+                {
+                  "id": "prutas",
+                  "word": "Prutas",
+                  "imageAsset": "assets/images/words/prutas.png",
+                  "audioAsset": "assets/audio/filipino/prutas.mp3",
+                  "phonetic": "pɾu.tas",
+                  "language": "filipino"
+                },
+                {
+                  "id": "prinsesa",
+                  "word": "Prinsesa",
+                  "imageAsset": "assets/images/words/prinsesa.png",
+                  "audioAsset": "assets/audio/filipino/prinsesa.mp3",
+                  "phonetic": "pɾɪn.sɛ.sa",
+                  "language": "filipino"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "hiligaynon",
+      "name": "Hiligaynon",
+      "code": "hil-PH",
+      "categories": [
+        {
+          "id": "hil_vowels",
+          "type": "vowels",
+          "name": "Patinig",
+          "description": "Tun-i ang mga patinig",
+          "units": [
+            {
+              "id": "hil_vowel_a",
+              "letter": "A",
+              "sound": "/a/",
+              "description": "Patinig A",
+              "categoryId": "hil_vowels",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_adlaw",
+                  "word": "Adlaw",
+                  "imageAsset": "assets/images/words/sun.png",
+                  "audioAsset": "assets/audio/hiligaynon/adlaw.mp3",
+                  "phonetic": "ad-law",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_ayam",
+                  "word": "Ayam",
+                  "imageAsset": "assets/images/words/dog.png",
+                  "audioAsset": "assets/audio/hiligaynon/ayam.mp3",
+                  "phonetic": "a-yam",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_vowel_e",
+              "letter": "E",
+              "sound": "/e/",
+              "description": "Patinig E",
+              "categoryId": "hil_vowels",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_eskwelahan",
+                  "word": "Eskwelahan",
+                  "imageAsset": "assets/images/words/school.png",
+                  "audioAsset": "assets/audio/hiligaynon/eskwelahan.mp3",
+                  "phonetic": "es-kwe-la-han",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_eroplano",
+                  "word": "Eroplano",
+                  "imageAsset": "assets/images/words/eroplano.png",
+                  "audioAsset": "assets/audio/hiligaynon/eroplano.mp3",
+                  "phonetic": "e-ro-pla-no",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_vowel_i",
+              "letter": "I",
+              "sound": "/i/",
+              "description": "Patinig I",
+              "categoryId": "hil_vowels",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_isda",
+                  "word": "Isda",
+                  "imageAsset": "assets/images/words/fish.png",
+                  "audioAsset": "assets/audio/hiligaynon/isda.mp3",
+                  "phonetic": "is-da",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_inom",
+                  "word": "Inom",
+                  "imageAsset": "assets/images/words/drink.png",
+                  "audioAsset": "assets/audio/hiligaynon/inom.mp3",
+                  "phonetic": "i-nom",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_vowel_o",
+              "letter": "O",
+              "sound": "/o/",
+              "description": "Patinig O",
+              "categoryId": "hil_vowels",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_orasan",
+                  "word": "Orasan",
+                  "imageAsset": "assets/images/words/orasan.png",
+                  "audioAsset": "assets/audio/hiligaynon/orasan.mp3",
+                  "phonetic": "o-ra-san",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_okra",
+                  "word": "Okra",
+                  "imageAsset": "assets/images/words/okra.png",
+                  "audioAsset": "assets/audio/hiligaynon/okra.mp3",
+                  "phonetic": "ok-ra",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_vowel_u",
+              "letter": "U",
+              "sound": "/u/",
+              "description": "Patinig U",
+              "categoryId": "hil_vowels",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_ulan",
+                  "word": "Ulan",
+                  "imageAsset": "assets/images/words/rain.png",
+                  "audioAsset": "assets/audio/hiligaynon/ulan.mp3",
+                  "phonetic": "u-lan",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_ulo",
+                  "word": "Ulo",
+                  "imageAsset": "assets/images/words/head.png",
+                  "audioAsset": "assets/audio/hiligaynon/ulo.mp3",
+                  "phonetic": "u-lo",
+                  "language": "hiligaynon"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hil_consonants",
+          "type": "consonants",
+          "name": "Katinig",
+          "description": "Tun-i ang mga katinig",
+          "units": [
+            {
+              "id": "hil_consonant_b",
+              "letter": "B",
+              "sound": "/b/",
+              "description": "Katinig B",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_balay",
+                  "word": "Balay",
+                  "imageAsset": "assets/images/words/house.png",
+                  "audioAsset": "assets/audio/hiligaynon/balay.mp3",
+                  "phonetic": "ba-lay",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_bola",
+                  "word": "Bola",
+                  "imageAsset": "assets/images/words/ball.png",
+                  "audioAsset": "assets/audio/hiligaynon/bola.mp3",
+                  "phonetic": "bo-la",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_k",
+              "letter": "K",
+              "sound": "/k/",
+              "description": "Katinig K",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_kuring",
+                  "word": "Kuring",
+                  "imageAsset": "assets/images/words/cat.png",
+                  "audioAsset": "assets/audio/hiligaynon/kuring.mp3",
+                  "phonetic": "ku-ring",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_kahoy",
+                  "word": "Kahoy",
+                  "imageAsset": "assets/images/words/tree.png",
+                  "audioAsset": "assets/audio/hiligaynon/kahoy.mp3",
+                  "phonetic": "ka-hoy",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_d",
+              "letter": "D",
+              "sound": "/d/",
+              "description": "Katinig D",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_dalan",
+                  "word": "Dalan",
+                  "imageAsset": "assets/images/words/road.png",
+                  "audioAsset": "assets/audio/hiligaynon/dalan.mp3",
+                  "phonetic": "da-lan",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_dahon",
+                  "word": "Dahon",
+                  "imageAsset": "assets/images/words/dahon.png",
+                  "audioAsset": "assets/audio/hiligaynon/dahon.mp3",
+                  "phonetic": "da-hon",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_g",
+              "letter": "G",
+              "sound": "/g/",
+              "description": "Katinig G",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_gatas",
+                  "word": "Gatas",
+                  "imageAsset": "assets/images/words/gatas.png",
+                  "audioAsset": "assets/audio/hiligaynon/gatas.mp3",
+                  "phonetic": "ga-tas",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_gab-i",
+                  "word": "Gab-i",
+                  "imageAsset": "assets/images/words/night.png",
+                  "audioAsset": "assets/audio/hiligaynon/gab-i.mp3",
+                  "phonetic": "gab-i",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_h",
+              "letter": "H",
+              "sound": "/h/",
+              "description": "Katinig H",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_hangin",
+                  "word": "Hangin",
+                  "imageAsset": "assets/images/words/wind.png",
+                  "audioAsset": "assets/audio/hiligaynon/hangin.mp3",
+                  "phonetic": "ha-ngin",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_hagdan",
+                  "word": "Hagdan",
+                  "imageAsset": "assets/images/words/stairs.png",
+                  "audioAsset": "assets/audio/hiligaynon/hagdan.mp3",
+                  "phonetic": "hag-dan",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_l",
+              "letter": "L",
+              "sound": "/l/",
+              "description": "Katinig L",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_lapis",
+                  "word": "Lapis",
+                  "imageAsset": "assets/images/words/lapis.png",
+                  "audioAsset": "assets/audio/hiligaynon/lapis.mp3",
+                  "phonetic": "la-pis",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_lolo",
+                  "word": "Lolo",
+                  "imageAsset": "assets/images/words/lolo.png",
+                  "audioAsset": "assets/audio/hiligaynon/lolo.mp3",
+                  "phonetic": "lo-lo",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_m",
+              "letter": "M",
+              "sound": "/m/",
+              "description": "Katinig M",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_manok",
+                  "word": "Manok",
+                  "imageAsset": "assets/images/words/manok.png",
+                  "audioAsset": "assets/audio/hiligaynon/manok.mp3",
+                  "phonetic": "ma-nok",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_mata",
+                  "word": "Mata",
+                  "imageAsset": "assets/images/words/mata.png",
+                  "audioAsset": "assets/audio/hiligaynon/mata.mp3",
+                  "phonetic": "ma-ta",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_n",
+              "letter": "N",
+              "sound": "/n/",
+              "description": "Katinig N",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_nanay",
+                  "word": "Nanay",
+                  "imageAsset": "assets/images/words/nanay.png",
+                  "audioAsset": "assets/audio/hiligaynon/nanay.mp3",
+                  "phonetic": "na-nay",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_niyog",
+                  "word": "Niyog",
+                  "imageAsset": "assets/images/words/niyog.png",
+                  "audioAsset": "assets/audio/hiligaynon/niyog.mp3",
+                  "phonetic": "ni-yog",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_ng",
+              "letter": "Ng",
+              "sound": "/ŋ/",
+              "description": "Katinig Ng",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_ngipon",
+                  "word": "Ngipon",
+                  "imageAsset": "assets/images/words/ngipin.png",
+                  "audioAsset": "assets/audio/hiligaynon/ngipon.mp3",
+                  "phonetic": "ngi-pon",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_ngalan",
+                  "word": "Ngalan",
+                  "imageAsset": "assets/images/words/name.png",
+                  "audioAsset": "assets/audio/hiligaynon/ngalan.mp3",
+                  "phonetic": "nga-lan",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_p",
+              "letter": "P",
+              "sound": "/p/",
+              "description": "Katinig P",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_pispis",
+                  "word": "Pispis",
+                  "imageAsset": "assets/images/words/ibon.png",
+                  "audioAsset": "assets/audio/hiligaynon/pispis.mp3",
+                  "phonetic": "pis-pis",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_payong",
+                  "word": "Payong",
+                  "imageAsset": "assets/images/words/umbrella.png",
+                  "audioAsset": "assets/audio/hiligaynon/payong.mp3",
+                  "phonetic": "pa-yong",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_r",
+              "letter": "R",
+              "sound": "/r/",
+              "description": "Katinig R",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_relo",
+                  "word": "Relo",
+                  "imageAsset": "assets/images/words/watch.png",
+                  "audioAsset": "assets/audio/hiligaynon/relo.mp3",
+                  "phonetic": "re-lo",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_radyo",
+                  "word": "Radyo",
+                  "imageAsset": "assets/images/words/radio.png",
+                  "audioAsset": "assets/audio/hiligaynon/radyo.mp3",
+                  "phonetic": "rad-yo",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_s",
+              "letter": "S",
+              "sound": "/s/",
+              "description": "Katinig S",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_sapatos",
+                  "word": "Sapatos",
+                  "imageAsset": "assets/images/words/sapatos.png",
+                  "audioAsset": "assets/audio/hiligaynon/sapatos.mp3",
+                  "phonetic": "sa-pa-tos",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_saging",
+                  "word": "Saging",
+                  "imageAsset": "assets/images/words/saging.png",
+                  "audioAsset": "assets/audio/hiligaynon/saging.mp3",
+                  "phonetic": "sa-ging",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_t",
+              "letter": "T",
+              "sound": "/t/",
+              "description": "Katinig T",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_tubig",
+                  "word": "Tubig",
+                  "imageAsset": "assets/images/words/water.png",
+                  "audioAsset": "assets/audio/hiligaynon/tubig.mp3",
+                  "phonetic": "tu-big",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_tinapay",
+                  "word": "Tinapay",
+                  "imageAsset": "assets/images/words/bread.png",
+                  "audioAsset": "assets/audio/hiligaynon/tinapay.mp3",
+                  "phonetic": "ti-na-pay",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_w",
+              "letter": "W",
+              "sound": "/w/",
+              "description": "Katinig W",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_wala",
+                  "word": "Wala",
+                  "imageAsset": "assets/images/words/none.png",
+                  "audioAsset": "assets/audio/hiligaynon/wala.mp3",
+                  "phonetic": "wa-la",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_walo",
+                  "word": "Walo",
+                  "imageAsset": "assets/images/words/eight.png",
+                  "audioAsset": "assets/audio/hiligaynon/walo.mp3",
+                  "phonetic": "wa-lo",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_consonant_y",
+              "letter": "Y",
+              "sound": "/j/",
+              "description": "Katinig Y",
+              "categoryId": "hil_consonants",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_yabi",
+                  "word": "Yabi",
+                  "imageAsset": "assets/images/words/key.png",
+                  "audioAsset": "assets/audio/hiligaynon/yabi.mp3",
+                  "phonetic": "ya-bi",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_yelo",
+                  "word": "Yelo",
+                  "imageAsset": "assets/images/words/yelo.png",
+                  "audioAsset": "assets/audio/hiligaynon/yelo.mp3",
+                  "phonetic": "ye-lo",
+                  "language": "hiligaynon"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "hil_blends",
+          "type": "blends",
+          "name": "Kambal-Katinig",
+          "description": "Tun-i ang mga kambal-katinig",
+          "units": [
+            {
+              "id": "hil_blend_kl",
+              "letter": "Kl",
+              "sound": "/kl/",
+              "description": "Kambal-Katinig Kl",
+              "categoryId": "hil_blends",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_klase",
+                  "word": "Klase",
+                  "imageAsset": "assets/images/words/klase.png",
+                  "audioAsset": "assets/audio/hiligaynon/klase.mp3",
+                  "phonetic": "kla-se",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_klinik",
+                  "word": "Klinik",
+                  "imageAsset": "assets/images/words/clinic.png",
+                  "audioAsset": "assets/audio/hiligaynon/klinik.mp3",
+                  "phonetic": "kli-nik",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_blend_pr",
+              "letter": "Pr",
+              "sound": "/pr/",
+              "description": "Kambal-Katinig Pr",
+              "categoryId": "hil_blends",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_prutas",
+                  "word": "Prutas",
+                  "imageAsset": "assets/images/words/fruit.png",
+                  "audioAsset": "assets/audio/hiligaynon/prutas.mp3",
+                  "phonetic": "pru-tas",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_prinsesa",
+                  "word": "Prinsesa",
+                  "imageAsset": "assets/images/words/prinsesa.png",
+                  "audioAsset": "assets/audio/hiligaynon/prinsesa.mp3",
+                  "phonetic": "prin-se-sa",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_blend_gw",
+              "letter": "Gw",
+              "sound": "/gw/",
+              "description": "Kambal-Katinig Gw",
+              "categoryId": "hil_blends",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_gwapa",
+                  "word": "Gwapa",
+                  "imageAsset": "assets/images/words/girl.png",
+                  "audioAsset": "assets/audio/hiligaynon/gwapa.mp3",
+                  "phonetic": "gwa-pa",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_gwapo",
+                  "word": "Gwapo",
+                  "imageAsset": "assets/images/words/boy.png",
+                  "audioAsset": "assets/audio/hiligaynon/gwapo.mp3",
+                  "phonetic": "gwa-po",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_blend_tr",
+              "letter": "Tr",
+              "sound": "/tr/",
+              "description": "Kambal-Katinig Tr",
+              "categoryId": "hil_blends",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_trak",
+                  "word": "Trak",
+                  "imageAsset": "assets/images/words/trak.png",
+                  "audioAsset": "assets/audio/hiligaynon/trak.mp3",
+                  "phonetic": "trak",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_trono",
+                  "word": "Trono",
+                  "imageAsset": "assets/images/words/throne.png",
+                  "audioAsset": "assets/audio/hiligaynon/trono.mp3",
+                  "phonetic": "tro-no",
+                  "language": "hiligaynon"
+                }
+              ]
+            },
+            {
+              "id": "hil_blend_br",
+              "letter": "Br",
+              "sound": "/br/",
+              "description": "Kambal-Katinig Br",
+              "categoryId": "hil_blends",
+              "language": "hiligaynon",
+              "examples": [
+                {
+                  "id": "hil_braso",
+                  "word": "Braso",
+                  "imageAsset": "assets/images/words/braso.png",
+                  "audioAsset": "assets/audio/hiligaynon/braso.mp3",
+                  "phonetic": "bra-so",
+                  "language": "hiligaynon"
+                },
+                {
+                  "id": "hil_brotsa",
+                  "word": "Brotsa",
+                  "imageAsset": "assets/images/words/brush.png",
+                  "audioAsset": "assets/audio/hiligaynon/brotsa.mp3",
+                  "phonetic": "brot-sa",
+                  "language": "hiligaynon"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
