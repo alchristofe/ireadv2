@@ -1,6 +1,6 @@
 # iRead: Bilingual Phonics Learning App - Documentation
 
-iRead is a mobile application designed to help young learners master phonics in both English and Filipino (Tagalog). The app provides an interactive, offline-first experience with a focus on ease of use for children and flexibility for educators.
+iRead is a mobile application designed to help young learners master phonics in both English, Filipino & Hiligaynon. The app provides an interactive, offline-first experience with a focus on ease of use for children and flexibility for educators.
 
 ---
 
@@ -20,6 +20,7 @@ Lessons are tailored to the phonemic structures of both English and Filipino.
 
 - **English**: Standard phonics following a proven curriculum.
 - **Filipino**: Focus on Tagalog phonology (Patinig and Katinig).
+- **Hiligaynon**: Focus on Hiligaynon phonology (Patinig and Katinig).
 
 ### 2. Interactive Lessons
 
