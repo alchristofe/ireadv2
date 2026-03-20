@@ -4,8 +4,7 @@ import 'firebase_options.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'core/helpers/storage_helper.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -35,8 +34,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: FutureBuilder<bool>(
-        future: _checkLoginStatus(),
+      home: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Scaffold(
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           }
-          if (snapshot.data == true) {
+          if (snapshot.hasData && snapshot.data != null) {
             return const DashboardScreen();
           }
           return const LoginScreen();
@@ -54,12 +53,4 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Future<bool> _checkLoginStatus() async {
-    try {
-      return await getLoginState();
-    } catch (e) {
-      print('DEBUG: Auth check error: $e');
-      return false;
-    }
-  }
 }

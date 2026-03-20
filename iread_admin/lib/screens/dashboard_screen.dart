@@ -4,7 +4,7 @@ import '../data/models/language.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
 import 'package:rive/rive.dart' hide Image;
-import '../core/helpers/storage_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'login_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -170,7 +170,7 @@ class _AdminSidebar extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () async {
-                    await clearLoginState();
+                    await FirebaseAuth.instance.signOut();
                     if (context.mounted) {
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => const LoginScreen()),

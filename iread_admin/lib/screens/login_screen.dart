@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide RadialGradient, Image;
 import 'package:flutter/material.dart' as material show RadialGradient, Image;
 import 'package:rive/rive.dart';
-import '../core/helpers/storage_helper.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
 import '../core/widgets/custom_button.dart';
@@ -36,29 +36,35 @@ class _LoginScreenState extends State<LoginScreen> {
     final username = _usernameController.text.trim();
     final password = _passwordController.text.trim();
 
-    if (username == 'iread_admin1' && password == 'ireadv2') {
-      try {
-        await saveLoginState(true);
-        if (mounted) {
-          // Await the push so we can catch any errors during transition
-          await Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const DashboardScreen()),
-          );
-        }
-      } catch (e) {
-        if (mounted) {
-          setState(() {
-            _isLoading = false;
-            _errorMessage = 'An error occurred during login: $e';
-          });
-        }
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
+      if (mounted) {
+        // Await the push so we can catch any errors during transition
+        await Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const DashboardScreen()),
+        );
       }
-    } else {
-      setState(() {
-        _isLoading = false;
-        _errorMessage = 'Invalid username or password';
-      });
+    } on FirebaseAuthException catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+          // Clean up the error message for UX
+          _errorMessage = e.code == 'invalid-credential' || e.code == 'user-not-found' || e.code == 'wrong-password' 
+              ? 'Invalid email or password' 
+              : e.message ?? 'Authentication failed';
+        });
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+          _errorMessage = 'An unexpected error occurred: $e';
+        });
+      }
     }
   }
 
@@ -164,10 +170,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             // Username Field
                             _buildTextField(
                               controller: _usernameController,
-                              label: 'Username',
-                              hint: 'Enter your username',
-                              icon: Icons.person_outline,
-                              validator: (v) => v!.isEmpty ? 'Enter username' : null,
+                              label: 'Email',
+                              hint: 'Enter your admin email',
+                              icon: Icons.email_outlined,
+                              validator: (v) => v!.isEmpty ? 'Enter email' : null,
                             ),
                             const SizedBox(height: 20),
                             // Password Field
