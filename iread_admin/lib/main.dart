@@ -4,10 +4,11 @@ import 'firebase_options.dart';
 import 'screens/dashboard_screen.dart';
 import 'screens/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'core/helpers/storage_helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   try {
     print('DEBUG: Initializing Firebase...');
     await Firebase.initializeApp(
@@ -55,8 +56,7 @@ class MyApp extends StatelessWidget {
 
   Future<bool> _checkLoginStatus() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      return prefs.getBool('isLoggedIn') ?? false;
+      return await getLoginState();
     } catch (e) {
       print('DEBUG: Auth check error: $e');
       return false;

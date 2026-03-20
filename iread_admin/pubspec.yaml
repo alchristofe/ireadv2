@@ -45,6 +45,7 @@ dependencies:
   record: ^6.1.2
   rive: ^0.13.11
   shared_preferences: ^2.5.2
+  shared_preferences_web: ^2.4.3
 
 dev_dependencies:
   flutter_test:

@@ -4,7 +4,7 @@ import '../data/models/language.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
 import 'package:rive/rive.dart' hide Image;
-import 'package:shared_preferences/shared_preferences.dart';
+import '../core/helpers/storage_helper.dart';
 import 'login_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -170,8 +170,7 @@ class _AdminSidebar extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () async {
-                    final prefs = await SharedPreferences.getInstance();
-                    await prefs.setBool('isLoggedIn', false);
+                    await clearLoginState();
                     if (context.mounted) {
                       Navigator.of(context).pushAndRemoveUntil(
                         MaterialPageRoute(builder: (context) => const LoginScreen()),

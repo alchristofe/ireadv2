@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide RadialGradient, Image;
 import 'package:flutter/material.dart' as material show RadialGradient, Image;
 import 'package:rive/rive.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../core/helpers/storage_helper.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
 import '../core/widgets/custom_button.dart';
@@ -38,8 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (username == 'iread_admin1' && password == 'ireadv2') {
       try {
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setBool('isLoggedIn', true);
+        await saveLoginState(true);
         if (mounted) {
           // Await the push so we can catch any errors during transition
           await Navigator.pushReplacement(
