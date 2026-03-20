@@ -4,7 +4,9 @@ import 'package:rive/rive.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
+import '../core/constants/app_spacing.dart';
 import '../core/widgets/custom_button.dart';
+import '../core/widgets/responsive_layout.dart';
 import 'dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -42,7 +44,6 @@ class _LoginScreenState extends State<LoginScreen> {
         password: password,
       );
       if (mounted) {
-        // Await the push so we can catch any errors during transition
         await Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const DashboardScreen()),
@@ -52,7 +53,6 @@ class _LoginScreenState extends State<LoginScreen> {
       if (mounted) {
         setState(() {
           _isLoading = false;
-          // Clean up the error message for UX
           _errorMessage = e.code == 'invalid-credential' || e.code == 'user-not-found' || e.code == 'wrong-password' 
               ? 'Invalid email or password' 
               : e.message ?? 'Authentication failed';
@@ -70,85 +70,78 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final isMobile = size.width < 600;
-
+    final bool isMobile = ResponsiveLayout.isMobile(context);
+    
     return Scaffold(
-      backgroundColor: Colors.grey[50], // Light background
+      backgroundColor: AppColors.background,
       body: Stack(
         children: [
           // Background Gradient decoration
           Positioned(
-            top: -100,
+            top: -150,
             right: -100,
             child: Container(
-              width: 400,
-              height: 400,
+              width: 500,
+              height: 500,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: material.RadialGradient(
                   colors: [
-                    AppColors.primary.withOpacity(0.1),
-                    AppColors.primary.withOpacity(0.0),
+                    AppColors.primary.withValues(alpha: 0.1),
+                    AppColors.primary.withValues(alpha: 0),
                   ],
                 ),
               ),
             ),
           ),
+          
           Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.l, vertical: AppSpacing.xl),
               child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth: isMobile ? double.infinity : 450,
+                constraints: const BoxConstraints(
+                  maxWidth: AppSpacing.loginCardWidth,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Mascot Animation
-                    const SizedBox(
-                      height: 180,
-                      width: 180,
-                      child: RiveAnimation.asset(
+                    SizedBox(
+                      height: isMobile ? 140 : 180,
+                      width: isMobile ? 140 : 180,
+                      child: const RiveAnimation.asset(
                         'assets/rive/antfly.riv',
                         artboard: 'New Artboard',
                         animations: ['idle'],
                         fit: BoxFit.contain,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    // iRead Logo / Name
+                    AppSpacing.verticalM,
+                    
+                    // Logo
                     material.Image.asset(
                       'assets/iread_text.png',
-                      height: 40,
+                      height: 32,
                       color: AppColors.primary,
                     ),
-                    const SizedBox(height: 8),
+                    AppSpacing.verticalS,
                     Text(
-                      'Super Admin Portal',
-                      style: AppTextStyles.heading2(context).copyWith(
-                        color: Colors.grey[600],
-                        fontSize: 18,
+                      'SUPER ADMIN PORTAL',
+                      style: AppTextStyles.label(context).copyWith(
+                        color: AppColors.textLight,
+                        letterSpacing: 2.0,
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    AppSpacing.verticalXL,
+                    
                     // Login Card
                     Container(
-                      padding: const EdgeInsets.all(32),
+                      padding: EdgeInsets.all(isMobile ? AppSpacing.l : AppSpacing.xl),
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.surface,
                         borderRadius: BorderRadius.circular(24),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                        border: Border.all(
-                          color: Colors.grey[200]!,
-                          width: 1,
-                        ),
+                        boxShadow: AppColors.premiumShadow,
+                        border: Border.all(color: AppColors.cardBorder, width: 1),
                       ),
                       child: Form(
                         key: _formKey,
@@ -157,87 +150,85 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                             Text(
                               'Sign In',
-                              style: AppTextStyles.heading1(context).copyWith(fontSize: 24),
+                              style: AppTextStyles.heading2(context),
+                              textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 8),
+                            AppSpacing.verticalS,
                             Text(
-                              'Please enter your credentials to continue',
-                              style: AppTextStyles.bodyMedium(context).copyWith(
-                                color: Colors.grey[500],
-                              ),
+                              'Enter your authorized credentials',
+                              style: AppTextStyles.bodyMedium(context),
+                              textAlign: TextAlign.center,
                             ),
-                            const SizedBox(height: 32),
+                            AppSpacing.verticalXL,
+                            
                             // Username Field
                             _buildTextField(
                               controller: _usernameController,
-                              label: 'Email',
-                              hint: 'Enter your admin email',
-                              icon: Icons.email_outlined,
-                              validator: (v) => v!.isEmpty ? 'Enter email' : null,
+                              label: 'Email Address',
+                              hint: 'admin@iread.com',
+                              icon: Icons.alternate_email_rounded,
+                              validator: (v) => v!.isEmpty ? 'Enter your email' : null,
                             ),
-                            const SizedBox(height: 20),
+                            AppSpacing.verticalL,
+                            
                             // Password Field
                             _buildTextField(
                               controller: _passwordController,
                               label: 'Password',
-                              hint: 'Enter your password',
-                              icon: Icons.lock_outline,
+                              hint: '••••••••',
+                              icon: Icons.lock_outline_rounded,
                               isObscure: !_isPasswordVisible,
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  _isPasswordVisible ? Icons.visibility_off : Icons.visibility,
-                                  color: Colors.grey[400],
-                                  size: 20,
+                                  _isPasswordVisible ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                                  color: AppColors.textLight,
+                                  size: 18,
                                 ),
                                 onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
                               ),
-                              validator: (v) => v!.isEmpty ? 'Enter password' : null,
+                              validator: (v) => v!.isEmpty ? 'Enter your password' : null,
                             ),
+                            
                             if (_errorMessage != null) ...[
-                              const SizedBox(height: 16),
+                              AppSpacing.verticalL,
                               Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 12,
-                                ),
+                                padding: AppSpacing.edgeInsetsM,
                                 decoration: BoxDecoration(
-                                  color: Colors.red[50],
+                                  color: AppColors.error.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: Colors.red[100]!),
+                                  border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
                                 ),
                                 child: Row(
                                   children: [
-                                    Icon(Icons.error_outline, color: Colors.red[400], size: 20),
-                                    const SizedBox(width: 12),
+                                    const Icon(Icons.error_outline_rounded, color: AppColors.error, size: 18),
+                                    AppSpacing.horizontalS,
                                     Expanded(
                                       child: Text(
                                         _errorMessage!,
-                                        style: AppTextStyles.bodyMedium(context).copyWith(
-                                          color: Colors.red[700],
-                                        ),
+                                        style: AppTextStyles.bodySmall(context).copyWith(color: AppColors.error),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                             ],
-                            const SizedBox(height: 32),
-                            // Login Button
+                            
+                            AppSpacing.verticalXL,
+                            
                             CustomButton(
-                              text: 'SIGN IN',
+                              text: 'SIGN IN TO DASHBOARD',
                               onPressed: _isLoading ? null : _login,
-                              icon: _isLoading ? null : Icons.login,
                               isLoading: _isLoading,
-                              backgroundColor: AppColors.primary,
                             ),
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(height: 40),
+                    
+                    AppSpacing.verticalXL,
                     Text(
-                      '© 2026 iRead. Optimized for Super Admin.',
-                      style: AppTextStyles.bodySmall(context).copyWith(color: Colors.grey[400]),
+                      '© 2026 iRead Education — Secure Access',
+                      style: AppTextStyles.bodySmall(context),
                     ),
                   ],
                 ),
@@ -261,43 +252,37 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          label,
-          style: AppTextStyles.bodyMedium(context).copyWith(
-            fontWeight: FontWeight.bold,
-            color: Colors.grey[700],
-          ),
+        Padding(
+          padding: const EdgeInsets.only(left: 4, bottom: 8),
+          child: Text(label, style: AppTextStyles.label(context)),
         ),
-        const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           obscureText: isObscure,
           validator: validator,
-          style: AppTextStyles.bodyMedium(context),
+          style: AppTextStyles.bodyMedium(context).copyWith(color: AppColors.textDark),
+          cursorColor: AppColors.primary,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: AppTextStyles.bodyMedium(context).copyWith(color: Colors.grey[400]),
+            hintStyle: AppTextStyles.bodyMedium(context).copyWith(color: AppColors.textLight),
             prefixIcon: Icon(icon, color: AppColors.primary, size: 20),
             suffixIcon: suffixIcon,
             filled: true,
-            fillColor: Colors.grey[50],
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            fillColor: AppColors.surfaceVariant.withValues(alpha: 0.5),
+            contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.m, vertical: 16),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey[200]!),
+              borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: Colors.grey[200]!),
+              borderSide: BorderSide(color: AppColors.divider.withValues(alpha: 0.5)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: AppColors.primary, width: 2),
+              borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
             ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(color: Colors.red, width: 1),
-            ),
+            errorStyle: AppTextStyles.bodySmall(context).copyWith(color: AppColors.error),
           ),
         ),
       ],

@@ -3,6 +3,8 @@ import 'units_list_screen.dart';
 import '../data/models/language.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
+import '../core/constants/app_spacing.dart';
+import '../core/widgets/responsive_layout.dart';
 import 'package:rive/rive.dart' hide Image;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_screen.dart';
@@ -20,14 +22,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isMobile = MediaQuery.of(context).size.width < 1024;
+    final bool isMobileOrTablet = !ResponsiveLayout.isDesktop(context);
 
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: AppColors.background,
-      drawer: isMobile
+      drawer: isMobileOrTablet
           ? Drawer(
-              width: 280,
+              width: AppSpacing.sidebarWidth,
+              backgroundColor: AppColors.surface,
               child: _AdminSidebar(
                 selectedLanguage: _selectedLanguage,
                 onLanguageSelected: (type) {
@@ -40,7 +43,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: Row(
         children: [
           // Sidebar for Desktop
-          if (!isMobile)
+          if (!isMobileOrTablet)
             _AdminSidebar(
               selectedLanguage: _selectedLanguage,
               onLanguageSelected: (type) => setState(() => _selectedLanguage = type),
@@ -50,8 +53,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Expanded(
             child: UnitsListScreen(
               language: _selectedLanguage,
-              isMobile: isMobile,
-              onMenuPressed: isMobile ? () => _scaffoldKey.currentState?.openDrawer() : null,
+              isMobile: isMobileOrTablet,
+              onMenuPressed: isMobileOrTablet ? () => _scaffoldKey.currentState?.openDrawer() : null,
             ),
           ),
         ],
@@ -72,33 +75,31 @@ class _AdminSidebar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 280,
+      width: AppSpacing.sidebarWidth,
       decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.05),
-            blurRadius: 10,
-            offset: const Offset(2, 0),
-          ),
-        ],
+        color: AppColors.surface,
+        border: Border(right: BorderSide(color: AppColors.divider.withValues(alpha: 0.5))),
       ),
       child: Column(
         children: [
           // Premium Header
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.l, 
+              vertical: AppSpacing.xxl
+            ),
             decoration: const BoxDecoration(
               gradient: AppColors.primaryGradient,
             ),
             child: Row(
               children: [
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.white.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
                   ),
                   child: const RiveAnimation.asset(
                     'assets/rive/antfly.riv',
@@ -106,7 +107,7 @@ class _AdminSidebar extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
-                const SizedBox(width: 12),
+                AppSpacing.horizontalM,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,20 +115,19 @@ class _AdminSidebar extends StatelessWidget {
                     children: [
                       Image.asset(
                         'assets/iread_text.png',
-                        height: 24,
+                        height: 18,
                         fit: BoxFit.contain,
                         color: Colors.white,
                         alignment: Alignment.centerLeft,
                       ),
-                      const SizedBox(height: 4),
+                      AppSpacing.verticalXS,
                       Text(
-                        'Super Admin',
-                        style: AppTextStyles.bodySmall(context).copyWith(
-                          color: Colors.white70,
-                          fontWeight: FontWeight.w500,
+                        'ADMIN CONSOLE',
+                        style: AppTextStyles.label(context).copyWith(
+                          color: Colors.white.withValues(alpha: 0.7),
+                          fontSize: 10,
+                          letterSpacing: 1.5,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
@@ -135,36 +135,59 @@ class _AdminSidebar extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 24),
+          
+          AppSpacing.verticalL,
+          
           // Navigation Links
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.m),
               children: [
-                _buildSectionHeader('MANAGE CONTENT'),
-                const SizedBox(height: 8),
-                _buildLanguageTile(LanguageType.english, 'English Units', Icons.g_translate),
-                _buildLanguageTile(LanguageType.filipino, 'Filipino Units', Icons.language),
-                _buildLanguageTile(LanguageType.hiligaynon, 'Hiligaynon Units', Icons.public),
+                _buildSectionHeader(context, 'CONTENT MANAGEMENT'),
+                AppSpacing.verticalS,
+                _buildLanguageTile(context, LanguageType.english, 'English Units', Icons.translate_rounded),
+                _buildLanguageTile(context, LanguageType.filipino, 'Filipino Units', Icons.language_rounded),
+                _buildLanguageTile(context, LanguageType.hiligaynon, 'Hiligaynon Units', Icons.public_rounded),
+                
+                AppSpacing.verticalXL,
+                _buildSectionHeader(context, 'SYSTEM'),
+                _buildNavTile(context, 'Settings', Icons.settings_outlined, () {}),
+                _buildNavTile(context, 'Activity Logs', Icons.history_rounded, () {}),
               ],
             ),
           ),
-          // Footer
+          
+          // Footer / User Profile
           Container(
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.all(AppSpacing.l),
+            decoration: BoxDecoration(
+              border: Border(top: BorderSide(color: AppColors.divider.withValues(alpha: 0.5))),
+            ),
             child: Row(
               children: [
-                const CircleAvatar(
-                  backgroundColor: AppColors.background,
-                  child: Icon(Icons.person, color: AppColors.primary),
+                Container(
+                  padding: const EdgeInsets.all(AppSpacing.xs),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.person_rounded, color: AppColors.primary, size: 20),
                 ),
-                const SizedBox(width: 12),
+                AppSpacing.horizontalM,
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Admin User', style: AppTextStyles.bodyMedium(context).copyWith(fontWeight: FontWeight.bold, color: AppColors.textDark)),
-                      Text('Super Access', style: AppTextStyles.bodySmall(context).copyWith(color: Colors.grey[600])),
+                      Text(
+                        'Super Admin', 
+                        style: AppTextStyles.label(context),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        'iRead V2', 
+                        style: AppTextStyles.bodySmall(context),
+                      ),
                     ],
                   ),
                 ),
@@ -178,8 +201,8 @@ class _AdminSidebar extends StatelessWidget {
                       );
                     }
                   },
-                  icon: const Icon(Icons.logout, color: Colors.grey, size: 20),
-                  tooltip: 'Logout',
+                  icon: const Icon(Icons.logout_rounded, color: AppColors.textLight, size: 18),
+                  tooltip: 'Log out',
                 ),
               ],
             ),
@@ -189,45 +212,54 @@ class _AdminSidebar extends StatelessWidget {
     );
   }
 
-  Widget _buildSectionHeader(String title) {
+  Widget _buildSectionHeader(BuildContext context, String title) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16, bottom: 8, top: 16),
+      padding: const EdgeInsets.only(left: AppSpacing.m, bottom: 4),
       child: Text(
         title,
-        style: TextStyle(
-          color: Colors.grey[500],
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1.2,
+        style: AppTextStyles.label(context).copyWith(
+          color: AppColors.textLight,
+          fontSize: 11,
+          letterSpacing: 0.8,
         ),
       ),
     );
   }
 
-  Widget _buildLanguageTile(LanguageType type, String title, IconData icon) {
+  Widget _buildLanguageTile(BuildContext context, LanguageType type, String title, IconData icon) {
     final isSelected = selectedLanguage == type;
     
+    return _buildNavTile(
+      context, 
+      title, 
+      icon, 
+      () => onLanguageSelected(type),
+      isSelected: isSelected,
+    );
+  }
+
+  Widget _buildNavTile(BuildContext context, String title, IconData icon, VoidCallback onTap, {bool isSelected = false}) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      decoration: BoxDecoration(
-        color: isSelected ? AppColors.primary.withValues(alpha: 0.1) : Colors.transparent,
-        borderRadius: BorderRadius.circular(12),
-      ),
+      margin: const EdgeInsets.only(bottom: 4),
       child: ListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        onTap: onTap,
+        dense: true,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        tileColor: isSelected ? AppColors.primary.withValues(alpha: 0.08) : Colors.transparent,
         leading: Icon(
           icon,
-          color: isSelected ? AppColors.primary : Colors.grey[600],
+          size: 20,
+          color: isSelected ? AppColors.primary : AppColors.textMedium,
         ),
         title: Text(
           title,
-          style: TextStyle(
-            color: isSelected ? AppColors.primary : Colors.grey[800],
-            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          style: AppTextStyles.bodyMedium(context).copyWith(
+            color: isSelected ? AppColors.primary : AppColors.textMedium,
+            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+            fontSize: 14,
           ),
         ),
-        selected: isSelected,
-        onTap: () => onLanguageSelected(type),
+        contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.m),
       ),
     );
   }

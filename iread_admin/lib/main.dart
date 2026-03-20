@@ -34,6 +34,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
+      home: const DashboardScreen(), // Temporarily bypassed for verification
+/*
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
@@ -50,6 +52,7 @@ class MyApp extends StatelessWidget {
           return const LoginScreen();
         },
       ),
+*/
     );
   }
 

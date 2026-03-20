@@ -1,43 +1,64 @@
 import 'package:flutter/material.dart';
 
-/// App color palette based on design mockups
+/// App color palette based on premium dashboard design standards
 class AppColors {
-  // Primary Colors
-  static const Color background = Color(0xFFFFF4E6); // Warm beige/cream
-  static const Color primary = Color(0xFFFF8C42); // Orange
+  // Primary Brand Colors (Maintained but refined)
+  static const Color primary = Color(0xFFFF8C42); // Vibrant Orange
+  static const Color primaryLight = Color(0xFFFFAC6B);
   static const Color primaryDark = Color(0xFFE67A2E);
   
   // Secondary Colors
-  static const Color secondary = Color(0xFF4A90E2); // Blue
-  static const Color secondaryPink = Color(0xFFE74C8C); // Pink
+  static const Color secondary = Color(0xFF4A90E2); // Professional Blue
+  static const Color secondaryDark = Color(0xFF357ABD);
   
-  // Feedback Colors
-  static const Color success = Color(0xFF4CAF50); // Green
-  static const Color error = Color(0xFFE74C3C); // Red
-  static const Color warning = Color(0xFFFFA726); // Amber
+  // Premium Neutral Palette
+  static const Color background = Color(0xFFF8F9FA); // Ultra-light gray for modern feel
+  static const Color surface = Colors.white;
+  static const Color surfaceVariant = Color(0xFFF1F3F5);
   
-  // Text Colors
-  static const Color textDark = Color(0xFF2C3E50);
-  static const Color textMedium = Color(0xFF5A6C7D);
-  static const Color textLight = Color(0xFF8E9AAF);
+  // Text Hierarchy
+  static const Color textDark = Color(0xFF1A1D23); // Almost black for high readability
+  static const Color textMedium = Color(0xFF495057); // Slate gray for body
+  static const Color textLight = Color(0xFFADB5BD); // Muted gray for captions
   static const Color textWhite = Color(0xFFFFFFFF);
   
-  // UI Elements
-  static const Color cardBorder = Color(0xFFE0D4C0);
-  static const Color cardBackground = Color(0xFFFFFBF5);
-  static const Color disabledGray = Color(0xFFBDBDBD);
-  static const Color progressBarBackground = Color(0xFFE0D4C0);
+  // Status Colors
+  static const Color success = Color(0xFF00B894); // Mint green
+  static const Color error = Color(0xFFFF7675); // Soft red
+  static const Color warning = Color(0xFFFAB1A0); // Soft amber
   
-  // Gradient Colors
+  // UI Elements
+  static const Color cardBorder = Color(0xFFE9ECEF);
+  static const Color divider = Color(0xFFDEE2E6);
+  static const Color inputFill = Color(0xFFF8F9FA);
+  
+  // Shadows
+  static List<BoxShadow> premiumShadow = [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.04),
+      blurRadius: 16,
+      offset: const Offset(0, 8),
+    ),
+  ];
+
+  static List<BoxShadow> softShadow = [
+    BoxShadow(
+      color: Colors.black.withValues(alpha: 0.02),
+      blurRadius: 8,
+      offset: const Offset(0, 4),
+    ),
+  ];
+  
+  // Gradients
   static const LinearGradient primaryGradient = LinearGradient(
-    colors: [Color(0xFFFF8C42), Color(0xFFFF6B35)],
+    colors: [primary, Color(0xFFFF6B35)],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
   
-  static const LinearGradient successGradient = LinearGradient(
-    colors: [Color(0xFF4CAF50), Color(0xFF45A049)],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
+  static const LinearGradient surfaceGradient = LinearGradient(
+    colors: [Colors.white, Color(0xFFF8F9FA)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
   );
 }
