@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058102347853",
+    "project_id": "ireadv2-16c79",
+    "storage_bucket": "ireadv2-16c79.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058102347853:android:2592e4467d20cdafb7f404",
+        "android_client_info": {
+          "package_name": "com.iread.iread"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQaV5vPRpSJh1LAYANzoUCBge7Xdw4eMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

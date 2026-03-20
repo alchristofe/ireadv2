@@ -11,6 +11,8 @@ class PhonicsUnit {
   final String categoryId;
   final LanguageType language;
   final String? letterAudio;
+  final DateTime? updatedAt;
+  final bool isDeleted;
 
   PhonicsUnit({
     required this.id,
@@ -21,6 +23,8 @@ class PhonicsUnit {
     required this.categoryId,
     required this.language,
     this.letterAudio,
+    this.updatedAt,
+    this.isDeleted = false,
   });
 
   factory PhonicsUnit.fromJson(Map<String, dynamic> json) {
@@ -43,6 +47,12 @@ class PhonicsUnit {
       ),
       letterAudio:
           json['letterAudio'] as String? ?? json['audioAsset'] as String?,
+      updatedAt: json['updatedAt'] != null
+          ? (json['updatedAt'] is int
+              ? DateTime.fromMillisecondsSinceEpoch(json['updatedAt'] as int)
+              : DateTime.tryParse(json['updatedAt'].toString()))
+          : null,
+      isDeleted: json['isDeleted'] as bool? ?? false,
     );
   }
 
@@ -56,6 +66,8 @@ class PhonicsUnit {
       'categoryId': categoryId,
       'language': language.name,
       'letterAudio': letterAudio,
+      'updatedAt': updatedAt?.millisecondsSinceEpoch,
+      'isDeleted': isDeleted,
     };
   }
 
@@ -68,6 +80,8 @@ class PhonicsUnit {
     String? categoryId,
     LanguageType? language,
     String? letterAudio,
+    DateTime? updatedAt,
+    bool? isDeleted,
   }) {
     return PhonicsUnit(
       id: id ?? this.id,
@@ -78,6 +92,8 @@ class PhonicsUnit {
       categoryId: categoryId ?? this.categoryId,
       language: language ?? this.language,
       letterAudio: letterAudio ?? this.letterAudio,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isDeleted: isDeleted ?? this.isDeleted,
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:iread/core/routes/route_names.dart';
 import 'package:iread/data/models/language.dart';
 import 'package:iread/data/models/phonics_unit.dart';
 import 'package:iread/data/repositories/lesson_repository.dart';
+import 'package:iread/data/services/cloud_sync_service.dart';
 
 /// Content editor screen for teachers with category organization
 class ContentEditorScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class ContentEditorScreen extends StatefulWidget {
 class _ContentEditorScreenState extends State<ContentEditorScreen>
     with SingleTickerProviderStateMixin {
   final LessonRepository _repository = LessonRepository();
+  late final CloudSyncService _syncService;
   List<PhonicsUnit> _units = [];
   bool _isLoading = true;
   LanguageType _selectedLanguage = LanguageType.english;
@@ -27,12 +29,26 @@ class _ContentEditorScreenState extends State<ContentEditorScreen>
   @override
   void initState() {
     super.initState();
+    _syncService = CloudSyncService(_repository);
+    _syncService.addListener(_onSyncStatusChanged);
     _tabController = TabController(length: 3, vsync: this);
     _loadUnits();
   }
 
+  void _onSyncStatusChanged() {
+    if (mounted) {
+      if (!_syncService.isSyncing && _syncService.syncStatusMessage.isNotEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(_syncService.syncStatusMessage)),
+        );
+      }
+      setState(() {});
+    }
+  }
+
   @override
   void dispose() {
+    _syncService.removeListener(_onSyncStatusChanged);
     _tabController.dispose();
     super.dispose();
   }
@@ -104,6 +120,27 @@ class _ContentEditorScreenState extends State<ContentEditorScreen>
         ),
         centerTitle: true,
         actions: [
+          // Sync with Cloud
+          if (_syncService.isSyncing)
+            const Padding(
+              padding: EdgeInsets.only(right: 16.0),
+              child: Center(
+                child: SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                ),
+              ),
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.sync, color: Colors.white),
+              tooltip: 'Sync with Cloud',
+              onPressed: () async {
+                await _syncService.syncWithCloud();
+                if (mounted) _loadUnits();
+              },
+            ),
           // Settings Button
           IconButton(
             icon: const Icon(Icons.settings, color: Colors.white),
