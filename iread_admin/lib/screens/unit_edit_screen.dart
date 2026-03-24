@@ -365,17 +365,17 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             hint: 'How is it pronounced?',
           ),
           AppSpacing.verticalL,
-          _buildTextField(
-            controller: _letterAudioController,
-            label: 'Audio URL (Sound)',
-            hint: 'https://...',
+          _buildMediaPicker(
+            label: 'Phonics Sound Audio',
             fieldId: 'letter_audio',
+            isImage: false,
             previewUrl: _letterAudioController.text,
             onUpload: () => _pickAndUpload(
               fieldId: 'letter_audio',
               isImage: false,
               controller: _letterAudioController,
             ),
+            onClear: () => setState(() => _letterAudioController.clear()),
           ),
           AppSpacing.verticalL,
           Text('Category', style: AppTextStyles.label(context)),
@@ -515,34 +515,32 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
           Row(
             children: [
               Expanded(
-                child: _buildTextField(
-                  label: 'Audio URL',
-                  hint: 'https://...',
-                  initialValue: example.audioAsset,
+                child: _buildMediaPicker(
+                  label: 'Flashcard Audio',
                   fieldId: 'example_${index}_audio',
+                  isImage: false,
                   previewUrl: example.audioAsset,
-                  onChanged: (v) => _examples[index] = example.copyWith(audioAsset: v),
                   onUpload: () => _pickAndUpload(
                     fieldId: 'example_${index}_audio',
                     isImage: false,
                     exampleIndex: index,
                   ),
+                  onClear: () => setState(() => _examples[index] = example.copyWith(audioAsset: '')),
                 ),
               ),
               AppSpacing.horizontalM,
               Expanded(
-                child: _buildTextField(
-                  label: 'Image URL',
-                  hint: 'https://...',
-                  initialValue: example.imageAsset,
+                child: _buildMediaPicker(
+                  label: 'Flashcard Image',
                   fieldId: 'example_${index}_image',
+                  isImage: true,
                   previewUrl: example.imageAsset,
-                  onChanged: (v) => _examples[index] = example.copyWith(imageAsset: v),
                   onUpload: () => _pickAndUpload(
                     fieldId: 'example_${index}_image',
                     isImage: true,
                     exampleIndex: index,
                   ),
+                  onClear: () => setState(() => _examples[index] = example.copyWith(imageAsset: '')),
                 ),
               ),
             ],
@@ -560,16 +558,7 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
     int maxLines = 1,
     String? Function(String?)? validator,
     Function(String)? onChanged,
-    String? fieldId,
-    VoidCallback? onUpload,
-    String? previewUrl,
   }) {
-    final bool isUploading = fieldId != null && (_uploadingFields[fieldId] ?? false);
-    final bool isAudio = fieldId?.contains('audio') ?? false;
-    final bool isImage = fieldId?.contains('image') ?? false;
-    final bool hasPreview = previewUrl != null && previewUrl.isNotEmpty && previewUrl.startsWith('http');
-    final bool isPlaying = isAudio && _currentlyPlayingUrl == previewUrl;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -588,34 +577,6 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             filled: true,
             fillColor: AppColors.surfaceVariant.withValues(alpha: 0.4),
             contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.m, vertical: 12),
-            suffixIcon: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                if (hasPreview && isAudio)
-                  IconButton(
-                    icon: Icon(
-                      isPlaying ? Icons.stop_circle_rounded : Icons.play_circle_fill_rounded,
-                      color: isPlaying ? AppColors.error : AppColors.success,
-                      size: 24,
-                    ),
-                    onPressed: () => _toggleAudioPreview(previewUrl),
-                  ),
-                if (onUpload != null)
-                  isUploading
-                      ? const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.0),
-                          child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)),
-                        )
-                      : IconButton(
-                          icon: Icon(
-                            isImage ? Icons.image_search_rounded : Icons.audiotrack_rounded,
-                            color: AppColors.primary,
-                            size: 20,
-                          ),
-                          onPressed: onUpload,
-                        ),
-              ],
-            ),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10), 
@@ -627,43 +588,148 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             ),
           ),
         ),
-        if (hasPreview && isImage) ...[
-          AppSpacing.verticalS,
-          Container(
-            height: 80,
-            width: 80,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.divider.withValues(alpha: 0.5)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                previewUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Center(
-                  child: Icon(Icons.broken_image_rounded, color: AppColors.textLight, size: 24),
-                ),
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return const Center(
-                    child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)),
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
       ],
     );
   }
+
+  Widget _buildMediaPicker({
+    required String label,
+    required String fieldId,
+    required bool isImage,
+    required String? previewUrl,
+    required VoidCallback onUpload,
+    required VoidCallback onClear,
+  }) {
+    final bool isUploading = _uploadingFields[fieldId] ?? false;
+    final bool hasPreview = previewUrl != null && previewUrl.isNotEmpty && previewUrl.startsWith('http');
+    final bool isPlaying = !isImage && _currentlyPlayingUrl == previewUrl;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: AppTextStyles.label(context).copyWith(fontSize: 12, color: AppColors.textMedium)),
+        AppSpacing.verticalXS,
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppSpacing.m),
+          decoration: BoxDecoration(
+            color: AppColors.surfaceVariant.withValues(alpha: 0.2),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: AppColors.divider.withValues(alpha: 0.3),
+              style: hasPreview ? BorderStyle.solid : BorderStyle.none,
+            ),
+          ),
+          child: isUploading
+              ? const Center(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20),
+                    child: Column(
+                      children: [
+                        SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2.5)),
+                        SizedBox(height: 12),
+                        Text('Uploading...', style: TextStyle(fontSize: 12, color: AppColors.primary, fontWeight: FontWeight.w500)),
+                      ],
+                    ),
+                  ),
+                )
+              : !hasPreview
+                  ? InkWell(
+                      onTap: onUpload,
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), style: BorderStyle.solid),
+                          color: AppColors.primary.withValues(alpha: 0.05),
+                        ),
+                        child: Column(
+                          children: [
+                            Icon(isImage ? Icons.add_photo_alternate_rounded : Icons.library_music_rounded, 
+                                 size: 32, color: AppColors.primary),
+                            const SizedBox(height: 8),
+                            Text('Tap to Upload ${isImage ? 'Image' : 'Audio'}', 
+                                 style: AppTextStyles.label(context).copyWith(color: AppColors.primary)),
+                          ],
+                        ),
+                      ),
+                    )
+                  : Column(
+                      children: [
+                        if (isImage)
+                          Stack(
+                            alignment: Alignment.topRight,
+                            children: [
+                              Container(
+                                height: 120,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  image: DecorationImage(image: NetworkImage(previewUrl), fit: BoxFit.cover),
+                                ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: IconButton.filled(
+                                  onPressed: onClear,
+                                  icon: const Icon(Icons.close_rounded, size: 18),
+                                  style: IconButton.styleFrom(
+                                    backgroundColor: Colors.black54,
+                                    foregroundColor: Colors.white,
+                                    padding: const EdgeInsets.all(4),
+                                    minimumSize: const Size(28, 28),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        else
+                          Row(
+                            children: [
+                              IconButton.filledTonal(
+                                onPressed: () => _toggleAudioPreview(previewUrl),
+                                icon: Icon(isPlaying ? Icons.stop_rounded : Icons.play_arrow_rounded, color: AppColors.primary),
+                                style: IconButton.styleFrom(
+                                  backgroundColor: AppColors.primary.withValues(alpha: 0.1),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                ),
+                              ),
+                              AppSpacing.horizontalM,
+                              const Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Audio Ready', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                                    Text('Click play to preview', style: TextStyle(fontSize: 11, color: AppColors.textMedium)),
+                                  ],
+                                ),
+                              ),
+                              IconButton(
+                                onPressed: onClear,
+                                icon: const Icon(Icons.delete_outline_rounded, color: AppColors.error, size: 20),
+                              ),
+                            ],
+                          ),
+                        AppSpacing.verticalM,
+                        OutlinedButton.icon(
+                          onPressed: onUpload,
+                          icon: const Icon(Icons.sync_rounded, size: 16),
+                          label: Text('Change ${isImage ? 'Image' : 'Audio'}', style: const TextStyle(fontSize: 12)),
+                          style: OutlinedButton.styleFrom(
+                            minimumSize: const Size(double.infinity, 36),
+                            side: BorderSide(color: AppColors.primary.withValues(alpha: 0.4)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                        ),
+                      ],
+                    ),
+        ),
+      ],
+    );
+  }
+
 
 
 }
