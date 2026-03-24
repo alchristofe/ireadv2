@@ -45,6 +45,8 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
   
   bool _isSaving = false;
   final Map<String, bool> _uploadingFields = {}; // Tracks loading state per field
+  String? _currentlyPlayingUrl;
+
 
 
   @override
@@ -216,6 +218,32 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
     }
   }
 
+  Future<void> _toggleAudioPreview(String url) async {
+    if (_currentlyPlayingUrl == url) {
+      await _audioPlayer.stop();
+      setState(() => _currentlyPlayingUrl = null);
+    } else {
+      try {
+        await _audioPlayer.stop();
+        await _audioPlayer.play(UrlSource(url));
+        setState(() => _currentlyPlayingUrl = url);
+        
+        _audioPlayer.onPlayerComplete.first.then((_) {
+          if (mounted && _currentlyPlayingUrl == url) {
+            setState(() => _currentlyPlayingUrl = null);
+          }
+        });
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error playing audio: $e'), backgroundColor: AppColors.error),
+          );
+        }
+      }
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -342,6 +370,7 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             label: 'Audio URL (Sound)',
             hint: 'https://...',
             fieldId: 'letter_audio',
+            previewUrl: _letterAudioController.text,
             onUpload: () => _pickAndUpload(
               fieldId: 'letter_audio',
               isImage: false,
@@ -491,6 +520,7 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                   hint: 'https://...',
                   initialValue: example.audioAsset,
                   fieldId: 'example_${index}_audio',
+                  previewUrl: example.audioAsset,
                   onChanged: (v) => _examples[index] = example.copyWith(audioAsset: v),
                   onUpload: () => _pickAndUpload(
                     fieldId: 'example_${index}_audio',
@@ -506,6 +536,7 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                   hint: 'https://...',
                   initialValue: example.imageAsset,
                   fieldId: 'example_${index}_image',
+                  previewUrl: example.imageAsset,
                   onChanged: (v) => _examples[index] = example.copyWith(imageAsset: v),
                   onUpload: () => _pickAndUpload(
                     fieldId: 'example_${index}_image',
@@ -531,8 +562,13 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
     Function(String)? onChanged,
     String? fieldId,
     VoidCallback? onUpload,
+    String? previewUrl,
   }) {
     final bool isUploading = fieldId != null && (_uploadingFields[fieldId] ?? false);
+    final bool isAudio = fieldId?.contains('audio') ?? false;
+    final bool isImage = fieldId?.contains('image') ?? false;
+    final bool hasPreview = previewUrl != null && previewUrl.isNotEmpty && previewUrl.startsWith('http');
+    final bool isPlaying = isAudio && _currentlyPlayingUrl == previewUrl;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -552,21 +588,34 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             filled: true,
             fillColor: AppColors.surfaceVariant.withValues(alpha: 0.4),
             contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.m, vertical: 12),
-            suffixIcon: onUpload != null
-                ? isUploading
-                    ? const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)),
-                      )
-                    : IconButton(
-                        icon: Icon(
-                          fieldId?.contains('image') ?? false ? Icons.image_search_rounded : Icons.audiotrack_rounded,
-                          color: AppColors.primary,
-                          size: 20,
+            suffixIcon: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (hasPreview && isAudio)
+                  IconButton(
+                    icon: Icon(
+                      isPlaying ? Icons.stop_circle_rounded : Icons.play_circle_fill_rounded,
+                      color: isPlaying ? AppColors.error : AppColors.success,
+                      size: 24,
+                    ),
+                    onPressed: () => _toggleAudioPreview(previewUrl),
+                  ),
+                if (onUpload != null)
+                  isUploading
+                      ? const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.0),
+                          child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)),
+                        )
+                      : IconButton(
+                          icon: Icon(
+                            isImage ? Icons.image_search_rounded : Icons.audiotrack_rounded,
+                            color: AppColors.primary,
+                            size: 20,
+                          ),
+                          onPressed: onUpload,
                         ),
-                        onPressed: onUpload,
-                      )
-                : null,
+              ],
+            ),
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10), 
@@ -578,9 +627,44 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             ),
           ),
         ),
+        if (hasPreview && isImage) ...[
+          AppSpacing.verticalS,
+          Container(
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.divider.withValues(alpha: 0.5)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                previewUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Center(
+                  child: Icon(Icons.broken_image_rounded, color: AppColors.textLight, size: 24),
+                ),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(
+                    child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2)),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
+
 
 }
 
