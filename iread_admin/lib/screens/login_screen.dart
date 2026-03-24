@@ -1,7 +1,9 @@
+import 'dart:ui';
 import 'package:flutter/material.dart' hide RadialGradient, Image;
 import 'package:flutter/material.dart' as material show RadialGradient, Image;
 import 'package:rive/rive.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
 import '../core/constants/app_spacing.dart';
@@ -73,13 +75,30 @@ class _LoginScreenState extends State<LoginScreen> {
     final bool isMobile = ResponsiveLayout.isMobile(context);
     
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: const Color(0xFF0F172A), // Premium Dark Slate background
       body: Stack(
         children: [
-          // Background Gradient decoration
+          // Background Gradient Nebula effect
           Positioned(
-            top: -150,
+            top: -100,
             right: -100,
+            child: Container(
+              width: 600,
+              height: 600,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: material.RadialGradient(
+                  colors: [
+                    AppColors.primary.withValues(alpha: 0.15),
+                    AppColors.primary.withValues(alpha: 0),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -150,
+            left: -100,
             child: Container(
               width: 500,
               height: 500,
@@ -87,8 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 shape: BoxShape.circle,
                 gradient: material.RadialGradient(
                   colors: [
-                    AppColors.primary.withValues(alpha: 0.1),
-                    AppColors.primary.withValues(alpha: 0),
+                    AppColors.secondary.withValues(alpha: 0.1),
+                    AppColors.secondary.withValues(alpha: 0),
                   ],
                 ),
               ),
@@ -105,10 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Mascot Animation
+                    // Mascot Animation (Reduced size for focus)
                     SizedBox(
-                      height: isMobile ? 140 : 180,
-                      width: isMobile ? 140 : 180,
+                      height: 100,
+                      width: 100,
                       child: const RiveAnimation.asset(
                         'assets/rive/antfly.riv',
                         artboard: 'New Artboard',
@@ -116,120 +135,154 @@ class _LoginScreenState extends State<LoginScreen> {
                         fit: BoxFit.contain,
                       ),
                     ),
-                    AppSpacing.verticalM,
+                    AppSpacing.verticalS,
                     
-                    // Logo
+                    // Logo with glow effect
                     material.Image.asset(
                       'assets/iread_text.png',
-                      height: 32,
-                      color: AppColors.primary,
+                      height: 28,
+                      color: Colors.white,
                     ),
-                    AppSpacing.verticalS,
+                    AppSpacing.verticalXS,
                     Text(
                       'SUPER ADMIN PORTAL',
                       style: AppTextStyles.label(context).copyWith(
-                        color: AppColors.textLight,
-                        letterSpacing: 2.0,
+                        color: Colors.white60,
+                        fontSize: 10,
+                        letterSpacing: 4.0,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
-                    AppSpacing.verticalXL,
+                    AppSpacing.verticalL,
                     
-                    // Login Card
-                    Container(
-                      padding: EdgeInsets.all(isMobile ? AppSpacing.l : AppSpacing.xl),
-                      decoration: BoxDecoration(
-                        color: AppColors.surface,
-                        borderRadius: BorderRadius.circular(24),
-                        boxShadow: AppColors.premiumShadow,
-                        border: Border.all(color: AppColors.cardBorder, width: 1),
-                      ),
-                      child: Form(
-                        key: _formKey,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              'Sign In',
-                              style: AppTextStyles.heading2(context),
-                              textAlign: TextAlign.center,
+                    // Glassmorphism Login Card
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                        child: Container(
+                          padding: EdgeInsets.all(isMobile ? AppSpacing.l : AppSpacing.xl),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withValues(alpha: 0.05),
+                            borderRadius: BorderRadius.circular(28),
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.1),
+                              width: 1.5,
                             ),
-                            AppSpacing.verticalS,
-                            Text(
-                              'Enter your authorized credentials',
-                              style: AppTextStyles.bodyMedium(context),
-                              textAlign: TextAlign.center,
-                            ),
-                            AppSpacing.verticalXL,
-                            
-                            // Username Field
-                            _buildTextField(
-                              controller: _usernameController,
-                              label: 'Email Address',
-                              hint: 'admin@iread.com',
-                              icon: Icons.alternate_email_rounded,
-                              validator: (v) => v!.isEmpty ? 'Enter your email' : null,
-                            ),
-                            AppSpacing.verticalL,
-                            
-                            // Password Field
-                            _buildTextField(
-                              controller: _passwordController,
-                              label: 'Password',
-                              hint: '••••••••',
-                              icon: Icons.lock_outline_rounded,
-                              isObscure: !_isPasswordVisible,
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isPasswordVisible ? Icons.visibility_off_rounded : Icons.visibility_rounded,
-                                  color: AppColors.textLight,
-                                  size: 18,
-                                ),
-                                onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
-                              ),
-                              validator: (v) => v!.isEmpty ? 'Enter your password' : null,
-                            ),
-                            
-                            if (_errorMessage != null) ...[
-                              AppSpacing.verticalL,
-                              Container(
-                                padding: AppSpacing.edgeInsetsM,
-                                decoration: BoxDecoration(
-                                  color: AppColors.error.withValues(alpha: 0.1),
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
-                                ),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.error_outline_rounded, color: AppColors.error, size: 18),
-                                    AppSpacing.horizontalS,
-                                    Expanded(
-                                      child: Text(
-                                        _errorMessage!,
-                                        style: AppTextStyles.bodySmall(context).copyWith(color: AppColors.error),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.2),
+                                blurRadius: 40,
+                                offset: const Offset(0, 20),
                               ),
                             ],
-                            
-                            AppSpacing.verticalXL,
-                            
-                            CustomButton(
-                              text: 'SIGN IN TO DASHBOARD',
-                              onPressed: _isLoading ? null : _login,
-                              isLoading: _isLoading,
+                          ),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  'Sign In',
+                                  style: AppTextStyles.heading2(context).copyWith(color: Colors.white),
+                                  textAlign: TextAlign.center,
+                                ),
+                                AppSpacing.verticalS,
+                                Text(
+                                  'Secure access to curriculum management',
+                                  style: AppTextStyles.bodyMedium(context).copyWith(color: Colors.white70),
+                                  textAlign: TextAlign.center,
+                                ),
+                                AppSpacing.verticalL,
+                                
+                                // Username Field
+                                _buildTextField(
+                                  controller: _usernameController,
+                                  label: 'Email Address',
+                                  hint: 'admin@iread.com',
+                                  icon: Icons.alternate_email_rounded,
+                                  validator: (v) => v!.isEmpty ? 'Enter your email' : null,
+                                ),
+                                AppSpacing.verticalM,
+                                
+                                // Password Field
+                                _buildTextField(
+                                  controller: _passwordController,
+                                  label: 'Password',
+                                  hint: '••••••••',
+                                  icon: Icons.lock_outline_rounded,
+                                  isObscure: !_isPasswordVisible,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      _isPasswordVisible ? Icons.visibility_off_rounded : Icons.visibility_rounded,
+                                      color: Colors.white38,
+                                      size: 18,
+                                    ),
+                                    onPressed: () => setState(() => _isPasswordVisible = !_isPasswordVisible),
+                                  ),
+                                  validator: (v) => v!.isEmpty ? 'Enter your password' : null,
+                                ),
+                                
+                                if (_errorMessage != null) ...[
+                                  AppSpacing.verticalM,
+                                  Container(
+                                    padding: AppSpacing.edgeInsetsM,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.error.withValues(alpha: 0.1),
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(color: AppColors.error.withValues(alpha: 0.2)),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        const Icon(Icons.error_outline_rounded, color: AppColors.error, size: 16),
+                                        AppSpacing.horizontalS,
+                                        Expanded(
+                                          child: Text(
+                                            _errorMessage!,
+                                            style: AppTextStyles.bodySmall(context).copyWith(color: AppColors.error),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                                
+                                AppSpacing.verticalL,
+                                
+                                Hero(
+                                  tag: 'login_button',
+                                  child: CustomButton(
+                                    text: 'SIGN IN TO DASHBOARD',
+                                    onPressed: _isLoading ? null : _login,
+                                    isLoading: _isLoading,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       ),
                     ),
                     
-                    AppSpacing.verticalXL,
+                    AppSpacing.verticalL,
                     Text(
-                      '© 2026 iRead Education — Secure Access',
-                      style: AppTextStyles.bodySmall(context),
+                      '© 2026 iRead Education — Platform Control',
+                      style: AppTextStyles.bodySmall(context).copyWith(color: Colors.white38, fontSize: 10),
                     ),
+                    AppSpacing.verticalS,
+                    TextButton.icon(
+                      onPressed: () => launchUrl(Uri.parse('https://iread-web1.vercel.app/')),
+                      icon: const Icon(Icons.public_rounded, size: 14, color: AppColors.primary),
+                      label: Text(
+                        'Visit Official Website', 
+                        style: AppTextStyles.label(context).copyWith(
+                          color: AppColors.primary,
+                          fontSize: 12,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                    AppSpacing.verticalM,
                   ],
                 ),
               ),
@@ -254,32 +307,32 @@ class _LoginScreenState extends State<LoginScreen> {
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 4, bottom: 8),
-          child: Text(label, style: AppTextStyles.label(context)),
+          child: Text(label, style: AppTextStyles.label(context).copyWith(color: Colors.white70, fontSize: 11)),
         ),
         TextFormField(
           controller: controller,
           obscureText: isObscure,
           validator: validator,
-          style: AppTextStyles.bodyMedium(context).copyWith(color: AppColors.textDark),
+          style: AppTextStyles.bodyMedium(context).copyWith(color: Colors.white),
           cursorColor: AppColors.primary,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: AppTextStyles.bodyMedium(context).copyWith(color: AppColors.textLight),
+            hintStyle: AppTextStyles.bodyMedium(context).copyWith(color: Colors.white24),
             prefixIcon: Icon(icon, color: AppColors.primary, size: 20),
             suffixIcon: suffixIcon,
             filled: true,
-            fillColor: AppColors.surfaceVariant.withValues(alpha: 0.5),
+            fillColor: Colors.white.withValues(alpha: 0.05),
             contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.m, vertical: 16),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(16),
               borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: AppColors.divider.withValues(alpha: 0.5)),
+              borderRadius: BorderRadius.circular(16),
+              borderSide: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(color: AppColors.primary, width: 1.5),
             ),
             errorStyle: AppTextStyles.bodySmall(context).copyWith(color: AppColors.error),
