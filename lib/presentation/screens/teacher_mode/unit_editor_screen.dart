@@ -502,13 +502,29 @@ class _UnitEditorScreenState extends State<UnitEditorScreen> {
                   margin: const EdgeInsets.only(bottom: 8),
                   child: ListTile(
                     leading: word.imageAsset.isNotEmpty
-                        ? Image.asset(
-                            word.imageAsset,
-                            width: 40,
-                            height: 40,
-                            errorBuilder: (_, __, ___) =>
-                                const Icon(Icons.image),
-                          )
+                        ? (word.imageAsset.startsWith('assets/')
+                            ? Image.asset(
+                                word.imageAsset,
+                                width: 40,
+                                height: 40,
+                                fit: BoxFit.cover,
+                                errorBuilder: (c, e, s) => const Icon(Icons.image),
+                              )
+                            : (word.imageAsset.startsWith('http')
+                                ? Image.network(
+                                    word.imageAsset,
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (c, e, s) => const Icon(Icons.image),
+                                  )
+                                : Image.file(
+                                    io.File(word.imageAsset),
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (c, e, s) => const Icon(Icons.image),
+                                  )))
                         : const Icon(Icons.image_not_supported),
                     title: Text(word.word),
                     subtitle: Text(word.phonetic),
@@ -801,9 +817,9 @@ class _WordEditorDialogState extends State<WordEditorDialog> {
                         ? DecorationImage(
                             image: _imagePath!.startsWith('assets/')
                                 ? AssetImage(_imagePath!) as ImageProvider
-                                : (!kIsWeb
-                                      ? FileImage(io.File(_imagePath!))
-                                      : NetworkImage(_imagePath!)),
+                                : (_imagePath!.startsWith('http')
+                                    ? NetworkImage(_imagePath!)
+                                    : FileImage(io.File(_imagePath!))),
                             fit: BoxFit.cover,
                           )
                         : null,

@@ -222,6 +222,12 @@ class _LessonScreenState extends State<LessonScreen>
 
   @override
   Widget build(BuildContext context) {
+    print('DEBUG: LessonScreen Version: 2.0 (With Network Support)');
+    if (_currentWord != null) {
+      print('DEBUG: LessonScreen current word: ${_currentWord!.word}');
+      print('DEBUG: LessonScreen imageAsset: "${_currentWord!.imageAsset}"');
+    }
+    
     if (_isLoading) {
       return const Scaffold(
         backgroundColor: AppColors.background,
@@ -322,61 +328,30 @@ class _LessonScreenState extends State<LessonScreen>
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(14),
                               child: _currentWord!.imageAsset.isNotEmpty
-                                  ? (_currentWord!.imageAsset.startsWith(
-                                          'assets/',
+                                  ? (_currentWord!.imageAsset.startsWith('assets/')
+                                      ? Image.asset(
+                                          _currentWord!.imageAsset,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) => _buildErrorImage(),
                                         )
-                                        ? Image.asset(
-                                            _currentWord!.imageAsset,
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                                  return const Center(
-                                                    child: Icon(
-                                                      Icons.image,
-                                                      size: 60,
-                                                      color: AppColors
-                                                          .disabledGray,
-                                                    ),
-                                                  );
-                                                },
-                                          )
-                                        : (!kIsWeb
+                                      : (_currentWord!.imageAsset.startsWith('http')
+                                          ? Image.network(
+                                              _currentWord!.imageAsset,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error, stackTrace) => _buildErrorImage(),
+                                              loadingBuilder: (context, child, loadingProgress) {
+                                                if (loadingProgress == null) return child;
+                                                return const Center(child: CircularProgressIndicator(strokeWidth: 2));
+                                              },
+                                            )
+                                          : (!kIsWeb
                                               ? Image.file(
-                                                  io.File(
-                                                    _currentWord!.imageAsset,
-                                                  ),
+                                                  io.File(_currentWord!.imageAsset),
                                                   fit: BoxFit.cover,
-                                                  errorBuilder:
-                                                      (
-                                                        context,
-                                                        error,
-                                                        stackTrace,
-                                                      ) {
-                                                        return const Center(
-                                                          child: Icon(
-                                                            Icons.image,
-                                                            size: 60,
-                                                            color: AppColors
-                                                                .disabledGray,
-                                                          ),
-                                                        );
-                                                      },
+                                                  errorBuilder: (context, error, stackTrace) => _buildErrorImage(),
                                                 )
-                                              : const Center(
-                                                  child: Icon(
-                                                    Icons.image,
-                                                    size: 60,
-                                                    color:
-                                                        AppColors.disabledGray,
-                                                  ),
-                                                )))
-                                  : const Center(
-                                      child: Icon(
-                                        Icons.image,
-                                        size: 60,
-                                        color: AppColors.disabledGray,
-                                      ),
-                                    ),
+                                              : _buildErrorImage())))
+                                  : _buildErrorImage(),
                             ),
                           ),
                           const SizedBox(height: 12),
@@ -596,5 +571,15 @@ class _LessonScreenState extends State<LessonScreen>
     _glowController.dispose();
     AudioPlayerUtil.stopAudio();
     super.dispose();
+  }
+
+  Widget _buildErrorImage() {
+    return const Center(
+      child: Icon(
+        Icons.image_not_supported_rounded,
+        size: 50,
+        color: AppColors.disabledGray,
+      ),
+    );
   }
 }

@@ -41,10 +41,13 @@ class AudioPlayerUtil {
         return;
       }
 
-      // Check if it's an asset path or local file
+      // Check if it's an asset path, network URL, or local file
       if (audioPath.startsWith('assets/')) {
         // Asset audio - remove 'assets/' prefix for AssetSource
         await _player.play(AssetSource(audioPath.replaceFirst('assets/', '')));
+      } else if (audioPath.startsWith('http')) {
+        // Network audio (Cloudinary/Firestore)
+        await _player.play(UrlSource(audioPath));
       } else {
         // Local file audio - use DeviceFileSource
         await _player.play(DeviceFileSource(audioPath));
