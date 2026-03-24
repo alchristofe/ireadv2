@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../data/models/language.dart';
@@ -304,52 +305,95 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
       ),
       body: Form(
         key: _formKey,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-            horizontal: isDesktop ? AppSpacing.xxl : AppSpacing.m,
-            vertical: AppSpacing.l
-          ),
-          child: Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1000),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (isDesktop) ...[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Unit Configuration', style: AppTextStyles.heading2(context)),
-                            Text('Configure phonics properties and flashcards', style: AppTextStyles.bodySmall(context)),
-                          ],
-                        ),
-                        CustomButton(
-                          text: 'Save Changes',
-                          onPressed: _isSaving ? null : _save,
-                          isLoading: _isSaving,
-                          width: 180,
-                        ),
+        child: Stack(
+          children: [
+            // Main Content Area
+            SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(
+                isDesktop ? AppSpacing.xxl : AppSpacing.m,
+                isDesktop ? 100 : AppSpacing.l, // Extra top padding for desktop to account for fixed header
+                isDesktop ? AppSpacing.xxl : AppSpacing.m,
+                AppSpacing.l,
+              ),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1000),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // On mobile we keep the header inside scroll
+                      if (!isDesktop) ...[
+                        Text('Unit Configuration', style: AppTextStyles.heading2(context)),
+                        Text('Configure phonics properties and flashcards', style: AppTextStyles.bodySmall(context)),
+                        AppSpacing.verticalL,
                       ],
-                    ),
-                    AppSpacing.verticalL,
-                  ],
-                  
-                  _buildSectionLayout(
-                    isDesktop: isDesktop,
-                    sections: [
-                      _buildInfoSection(context),
-                      _buildExamplesSection(context),
+                      
+                      _buildSectionLayout(
+                        isDesktop: isDesktop,
+                        sections: [
+                          _buildInfoSection(context),
+                          _buildExamplesSection(context),
+                        ],
+                      ),
+                      
+                      AppSpacing.verticalXXL,
                     ],
                   ),
-                  
-                  AppSpacing.verticalXXL,
-                ],
+                ),
               ),
             ),
-          ),
+
+            // Fixed Glass Header (Desktop Only)
+            if (isDesktop)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: ClipRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.xxl,
+                        vertical: AppSpacing.m,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.background.withValues(alpha: 0.7),
+                        border: Border(
+                          bottom: BorderSide(
+                            color: AppColors.divider.withValues(alpha: 0.1),
+                          ),
+                        ),
+                      ),
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1000),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('Unit Configuration', style: AppTextStyles.heading2(context)),
+                                  Text('Configure phonics properties and flashcards', style: AppTextStyles.bodySmall(context)),
+                                ],
+                              ),
+                              CustomButton(
+                                text: 'Save Changes',
+                                onPressed: _isSaving ? null : _save,
+                                isLoading: _isSaving,
+                                width: 180,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
