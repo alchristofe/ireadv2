@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' as material show RadialGradient, Image;
 import 'package:rive/rive.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../core/constants/app_colors.dart';
 import '../core/constants/app_text_styles.dart';
 import '../core/constants/app_spacing.dart';
@@ -114,6 +115,30 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           
+          Positioned(
+            top: 48,
+            left: 48,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SvgPicture.asset(
+                  'assets/iread_logo_lightv1.svg',
+                  height: 38,
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'SUPER ADMIN PORTAL',
+                  style: AppTextStyles.label(context).copyWith(
+                    color: Colors.white60,
+                    fontSize: 9,
+                    letterSpacing: 4.0,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.l, vertical: AppSpacing.xl),
@@ -133,24 +158,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         artboard: 'New Artboard',
                         animations: ['idle'],
                         fit: BoxFit.contain,
-                      ),
-                    ),
-                    AppSpacing.verticalS,
-                    
-                    // Logo with glow effect
-                    material.Image.asset(
-                      'assets/iread_text.png',
-                      height: 28,
-                      color: Colors.white,
-                    ),
-                    AppSpacing.verticalXS,
-                    Text(
-                      'SUPER ADMIN PORTAL',
-                      style: AppTextStyles.label(context).copyWith(
-                        color: Colors.white60,
-                        fontSize: 10,
-                        letterSpacing: 4.0,
-                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     AppSpacing.verticalL,

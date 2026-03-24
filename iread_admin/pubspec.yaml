@@ -48,6 +48,7 @@ dependencies:
   shared_preferences_web: ^2.4.3
   firebase_auth: ^6.2.0
   cloudinary_flutter: ^1.1.0
+  flutter_svg: ^2.0.10+1
   url_launcher: ^6.3.1
   http: ^1.1.0
 
@@ -87,6 +88,7 @@ flutter:
     - assets/data/
     - assets/images/
     - assets/iread_text.png
+    - assets/iread_logo_lightv1.svg
     - assets/rive/antfly.riv
   # assets:
   #   - images/a_dot_burr.jpeg
