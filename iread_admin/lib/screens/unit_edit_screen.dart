@@ -371,13 +371,15 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text('Unit Configuration', style: AppTextStyles.heading2(context)),
-                                  Text('Configure phonics properties and flashcards', style: AppTextStyles.bodySmall(context)),
-                                ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('Unit Configuration', style: AppTextStyles.heading2(context)),
+                                    Text('Configure phonics properties and flashcards', style: AppTextStyles.bodySmall(context)),
+                                  ],
+                                ),
                               ),
                               CustomButton(
                                 text: 'Save Changes',

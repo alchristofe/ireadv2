@@ -90,16 +90,18 @@ class _UnitsListScreenState extends State<UnitsListScreen> with SingleTickerProv
                 desktop: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Curriculum Management', style: AppTextStyles.heading1(context)),
-                        AppSpacing.verticalXS,
-                        Text(
-                          'Viewing ${widget.language.displayName} lessons and activities',
-                          style: AppTextStyles.bodyMedium(context),
-                        ),
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Curriculum Management', style: AppTextStyles.heading1(context)),
+                          AppSpacing.verticalXS,
+                          Text(
+                            'Viewing ${widget.language.displayName} lessons and activities',
+                            style: AppTextStyles.bodyMedium(context),
+                          ),
+                        ],
+                      ),
                     ),
                     CustomButton(
                       text: 'Create New Unit',
