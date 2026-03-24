@@ -25,7 +25,32 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isPasswordVisible = false;
   bool _isLoading = false;
+  bool _isFormFilled = false;
   String? _errorMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameController.addListener(_validateForm);
+    _passwordController.addListener(_validateForm);
+  }
+
+  @override
+  void dispose() {
+    _usernameController.removeListener(_validateForm);
+    _passwordController.removeListener(_validateForm);
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _validateForm() {
+    final isValid = _usernameController.text.trim().isNotEmpty && 
+                    _passwordController.text.trim().isNotEmpty;
+    if (isValid != _isFormFilled) {
+      setState(() => _isFormFilled = isValid);
+    }
+  }
 
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
@@ -260,7 +285,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   tag: 'login_button',
                                   child: CustomButton(
                                     text: 'SIGN IN TO DASHBOARD',
-                                    onPressed: _isLoading ? null : _login,
+                                    onPressed: (_isFormFilled && !_isLoading) ? _login : null,
                                     isLoading: _isLoading,
                                   ),
                                 ),
