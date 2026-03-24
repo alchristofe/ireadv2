@@ -352,17 +352,37 @@ class _UnitsListScreenState extends State<UnitsListScreen> with SingleTickerProv
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text('Delete "${unit.letter.toUpperCase()}"?'),
-        content: const Text('This action cannot be undone and will remove all associated flashcards.'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(
+          children: [
+            const Icon(Icons.warning_amber_rounded, color: AppColors.error),
+            AppSpacing.horizontalS,
+            Text('Confirm Deletion', style: AppTextStyles.heading3(context).copyWith(color: AppColors.error)),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('You are about to delete the unit "${unit.letter.toUpperCase()}".', style: const TextStyle(fontWeight: FontWeight.bold)),
+            AppSpacing.verticalS,
+            const Text('This will permanently remove all associated flashcards and curriculum data. This action cannot be reversed.'),
+          ],
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel', style: TextStyle(color: AppColors.textLight)),
+            child: const Text('Keep Unit', style: TextStyle(color: AppColors.textLight)),
           ),
-          TextButton(
+          ElevatedButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Delete Forever', style: TextStyle(color: AppColors.error, fontWeight: FontWeight.bold)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.error,
+              foregroundColor: Colors.white,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              elevation: 0,
+            ),
+            child: const Text('Delete Forever', style: TextStyle(fontWeight: FontWeight.bold)),
           ),
         ],
       ),

@@ -91,6 +91,27 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
   Future<void> _save() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text('Save Changes?'),
+        content: const Text('Are you sure you want to save these changes to the curriculum?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel', style: TextStyle(color: AppColors.textLight)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Save', style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm != true) return;
+
     setState(() => _isSaving = true);
 
     try {
@@ -445,7 +466,29 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
               isImage: false,
               controller: _letterAudioController,
             ),
-            onClear: () => setState(() => _letterAudioController.clear()),
+            onClear: () async {
+              final confirm = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  title: const Text('Clear Audio?'),
+                  content: const Text('Are you sure you want to remove this audio file reference?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: const Text('Cancel', style: TextStyle(color: AppColors.textLight)),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: const Text('Clear', style: TextStyle(color: AppColors.error)),
+                    ),
+                  ],
+                ),
+              );
+              if (confirm == true) {
+                setState(() => _letterAudioController.clear());
+              }
+            },
           ),
           AppSpacing.verticalL,
           Text('Category', style: AppTextStyles.label(context)),
@@ -554,7 +597,29 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                 IconButton(
                   visualDensity: VisualDensity.compact,
                   icon: const Icon(Icons.delete_sweep_rounded, color: AppColors.error, size: 20),
-                  onPressed: () => setState(() => _examples.removeAt(index)),
+                  onPressed: () async {
+                    final confirm = await showDialog<bool>(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        title: const Text('Delete Flashcard?'),
+                        content: const Text('Are you sure you want to remove this flashcard? This action cannot be undone.'),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, false),
+                            child: const Text('Cancel', style: TextStyle(color: AppColors.textLight)),
+                          ),
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, true),
+                            child: const Text('Delete', style: TextStyle(color: AppColors.error, fontWeight: FontWeight.bold)),
+                          ),
+                        ],
+                      ),
+                    );
+                    if (confirm == true) {
+                      setState(() => _examples.removeAt(index));
+                    }
+                  },
                 ),
             ],
           ),
@@ -592,7 +657,29 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
               isImage: false,
               exampleIndex: index,
             ),
-            onClear: () => setState(() => _examples[index] = example.copyWith(audioAsset: '')),
+            onClear: () async {
+              final confirm = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  title: const Text('Clear Audio?'),
+                  content: const Text('Are you sure you want to remove this flashcard audio?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: const Text('Cancel', style: TextStyle(color: AppColors.textLight)),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: const Text('Clear', style: TextStyle(color: AppColors.error)),
+                    ),
+                  ],
+                ),
+              );
+              if (confirm == true) {
+                setState(() => _examples[index] = example.copyWith(audioAsset: ''));
+              }
+            },
           ),
           AppSpacing.verticalM,
           _buildMediaPicker(
@@ -605,7 +692,29 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
               isImage: true,
               exampleIndex: index,
             ),
-            onClear: () => setState(() => _examples[index] = example.copyWith(imageAsset: '')),
+            onClear: () async {
+              final confirm = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  title: const Text('Clear Image?'),
+                  content: const Text('Are you sure you want to remove this flashcard image?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, false),
+                      child: const Text('Cancel', style: TextStyle(color: AppColors.textLight)),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, true),
+                      child: const Text('Clear', style: TextStyle(color: AppColors.error)),
+                    ),
+                  ],
+                ),
+              );
+              if (confirm == true) {
+                setState(() => _examples[index] = example.copyWith(imageAsset: ''));
+              }
+            },
           ),
         ],
       ),
