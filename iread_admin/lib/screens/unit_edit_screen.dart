@@ -10,6 +10,11 @@ import '../core/widgets/custom_button.dart';
 import '../core/widgets/responsive_layout.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:uuid/uuid.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:file_picker/file_picker.dart';
+import '../core/helpers/cloudinary_service.dart';
+import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class UnitEditScreen extends StatefulWidget {
   final LanguageType language;
@@ -39,6 +44,8 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
   late List<WordExample> _examples;
   
   bool _isSaving = false;
+  final Map<String, bool> _uploadingFields = {}; // Tracks loading state per field
+
 
   @override
   void initState() {
@@ -123,6 +130,92 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
       if (mounted) setState(() => _isSaving = false);
     }
   }
+
+  Future<void> _pickAndUpload({
+    required String fieldId,
+    required bool isImage,
+    TextEditingController? controller,
+    int? exampleIndex,
+  }) async {
+    setState(() => _uploadingFields[fieldId] = true);
+
+    try {
+      String? secureUrl;
+
+      if (isImage) {
+        final ImagePicker picker = ImagePicker();
+        final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+        
+        if (image != null) {
+          if (kIsWeb) {
+            final bytes = await image.readAsBytes();
+            secureUrl = await CloudinaryService.uploadBytes(
+              bytes: bytes,
+              filename: image.name,
+              resourceType: 'image',
+            );
+          } else {
+            secureUrl = await CloudinaryService.uploadFile(
+              file: File(image.path),
+              resourceType: 'image',
+            );
+          }
+        }
+      } else {
+        final FilePickerResult? result = await FilePicker.platform.pickFiles(
+          type: FileType.audio,
+          allowMultiple: false,
+        );
+
+        if (result != null && result.files.single.bytes != null) {
+          secureUrl = await CloudinaryService.uploadBytes(
+            bytes: result.files.single.bytes!,
+            filename: result.files.single.name,
+            resourceType: 'video', // Cloudinary uses 'video' for audio
+          );
+        } else if (result != null && result.files.single.path != null) {
+          secureUrl = await CloudinaryService.uploadFile(
+            file: File(result.files.single.path!),
+            resourceType: 'video',
+          );
+        }
+      }
+
+      if (secureUrl != null) {
+        setState(() {
+          if (controller != null) {
+            controller.text = secureUrl!;
+          } else if (exampleIndex != null) {
+            if (isImage) {
+              _examples[exampleIndex] = _examples[exampleIndex].copyWith(imageAsset: secureUrl);
+            } else {
+              _examples[exampleIndex] = _examples[exampleIndex].copyWith(audioAsset: secureUrl);
+            }
+          }
+        });
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Upload successful'), backgroundColor: AppColors.success),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Upload failed. Check Cloudinary configuration.'), backgroundColor: AppColors.error),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $e'), backgroundColor: AppColors.error),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _uploadingFields[fieldId] = false);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -248,6 +341,12 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             controller: _letterAudioController,
             label: 'Audio URL (Sound)',
             hint: 'https://...',
+            fieldId: 'letter_audio',
+            onUpload: () => _pickAndUpload(
+              fieldId: 'letter_audio',
+              isImage: false,
+              controller: _letterAudioController,
+            ),
           ),
           AppSpacing.verticalL,
           Text('Category', style: AppTextStyles.label(context)),
@@ -391,7 +490,13 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                   label: 'Audio URL',
                   hint: 'https://...',
                   initialValue: example.audioAsset,
+                  fieldId: 'example_${index}_audio',
                   onChanged: (v) => _examples[index] = example.copyWith(audioAsset: v),
+                  onUpload: () => _pickAndUpload(
+                    fieldId: 'example_${index}_audio',
+                    isImage: false,
+                    exampleIndex: index,
+                  ),
                 ),
               ),
               AppSpacing.horizontalM,
@@ -400,7 +505,13 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                   label: 'Image URL',
                   hint: 'https://...',
                   initialValue: example.imageAsset,
+                  fieldId: 'example_${index}_image',
                   onChanged: (v) => _examples[index] = example.copyWith(imageAsset: v),
+                  onUpload: () => _pickAndUpload(
+                    fieldId: 'example_${index}_image',
+                    isImage: true,
+                    exampleIndex: index,
+                  ),
                 ),
               ),
             ],
@@ -418,7 +529,11 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
     int maxLines = 1,
     String? Function(String?)? validator,
     Function(String)? onChanged,
+    String? fieldId,
+    VoidCallback? onUpload,
   }) {
+    final bool isUploading = fieldId != null && (_uploadingFields[fieldId] ?? false);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -437,6 +552,21 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             filled: true,
             fillColor: AppColors.surfaceVariant.withValues(alpha: 0.4),
             contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.m, vertical: 12),
+            suffixIcon: onUpload != null
+                ? isUploading
+                    ? const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2)),
+                      )
+                    : IconButton(
+                        icon: Icon(
+                          fieldId?.contains('image') ?? false ? Icons.image_search_rounded : Icons.audiotrack_rounded,
+                          color: AppColors.primary,
+                          size: 20,
+                        ),
+                        onPressed: onUpload,
+                      )
+                : null,
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide.none),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10), 
@@ -451,6 +581,7 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
       ],
     );
   }
+
 }
 
 class _CardWrapper extends StatelessWidget {
