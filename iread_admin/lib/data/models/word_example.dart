@@ -8,6 +8,7 @@ class WordExample {
   final String audioAsset;
   final String phonetic;
   final LanguageType language;
+  final DateTime? updatedAt;
 
   WordExample({
     required this.id,
@@ -16,6 +17,7 @@ class WordExample {
     required this.audioAsset,
     required this.phonetic,
     required this.language,
+    this.updatedAt,
   });
 
   factory WordExample.fromJson(Map<String, dynamic> json) {
@@ -26,6 +28,11 @@ class WordExample {
       audioAsset: json['audioAsset'] as String,
       phonetic: json['phonetic'] as String? ?? '',
       language: LanguageType.fromString(json['language'] as String? ?? 'english'),
+      updatedAt: json['updatedAt'] != null
+          ? (json['updatedAt'] is int
+              ? DateTime.fromMillisecondsSinceEpoch(json['updatedAt'] as int)
+              : DateTime.tryParse(json['updatedAt'].toString()))
+          : null,
     );
   }
 
@@ -37,6 +44,7 @@ class WordExample {
       'audioAsset': audioAsset,
       'phonetic': phonetic,
       'language': language.name,
+      'updatedAt': updatedAt?.millisecondsSinceEpoch,
     };
   }
 
@@ -47,6 +55,7 @@ class WordExample {
     String? audioAsset,
     String? phonetic,
     LanguageType? language,
+    DateTime? updatedAt,
   }) {
     return WordExample(
       id: id ?? this.id,
@@ -55,6 +64,7 @@ class WordExample {
       audioAsset: audioAsset ?? this.audioAsset,
       phonetic: phonetic ?? this.phonetic,
       language: language ?? this.language,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 }

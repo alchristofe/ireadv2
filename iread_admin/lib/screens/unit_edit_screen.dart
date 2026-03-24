@@ -97,6 +97,11 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                          (widget.language == LanguageType.filipino ? 'fil' : 'hil');
       final categoryId = '${langPrefix}_$_category';
 
+      final now = DateTime.now();
+      
+      // Update timestamps for all examples
+      final updatedExamples = _examples.map((e) => e.copyWith(updatedAt: now)).toList();
+
       final PhonicsUnit finalUnit = PhonicsUnit(
         id: widget.unit?.id ?? '${langPrefix}_${_category[0]}_${_letterController.text.trim().toLowerCase()}',
         letter: _letterController.text.trim().toLowerCase(),
@@ -105,7 +110,8 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
         letterAudio: _letterAudioController.text.trim(),
         categoryId: categoryId,
         language: widget.language,
-        examples: _examples,
+        examples: updatedExamples,
+        updatedAt: now,
       );
 
       final docRef = FirebaseFirestore.instance.collection('phonics_units').doc(finalUnit.id);
@@ -188,10 +194,17 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
           if (controller != null) {
             controller.text = secureUrl!;
           } else if (exampleIndex != null) {
+            final now = DateTime.now();
             if (isImage) {
-              _examples[exampleIndex] = _examples[exampleIndex].copyWith(imageAsset: secureUrl);
+              _examples[exampleIndex] = _examples[exampleIndex].copyWith(
+                imageAsset: secureUrl,
+                updatedAt: now,
+              );
             } else {
-              _examples[exampleIndex] = _examples[exampleIndex].copyWith(audioAsset: secureUrl);
+              _examples[exampleIndex] = _examples[exampleIndex].copyWith(
+                audioAsset: secureUrl,
+                updatedAt: now,
+              );
             }
           }
         });
@@ -225,7 +238,17 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
     } else {
       try {
         await _audioPlayer.stop();
-        await _audioPlayer.play(UrlSource(url));
+        if (url.startsWith('http')) {
+          await _audioPlayer.play(UrlSource(url));
+        } else if (url.startsWith('assets/')) {
+          // AudioPlayers expects paths relative to the assets folder
+          final assetPath = url.replaceFirst('assets/', '');
+          await _audioPlayer.play(AssetSource(assetPath));
+        } else {
+          // Fallback if it's just a local file path
+          await _audioPlayer.play(DeviceFileSource(url));
+        }
+        
         setState(() => _currentlyPlayingUrl = url);
         
         _audioPlayer.onPlayerComplete.first.then((_) {
@@ -242,6 +265,7 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
       }
     }
   }
+
 
 
 
@@ -512,43 +536,36 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
             ],
           ),
           AppSpacing.verticalM,
-          Row(
-            children: [
-              Expanded(
-                child: _buildMediaPicker(
-                  label: 'Flashcard Audio',
-                  fieldId: 'example_${index}_audio',
-                  isImage: false,
-                  previewUrl: example.audioAsset,
-                  onUpload: () => _pickAndUpload(
-                    fieldId: 'example_${index}_audio',
-                    isImage: false,
-                    exampleIndex: index,
-                  ),
-                  onClear: () => setState(() => _examples[index] = example.copyWith(audioAsset: '')),
-                ),
-              ),
-              AppSpacing.horizontalM,
-              Expanded(
-                child: _buildMediaPicker(
-                  label: 'Flashcard Image',
-                  fieldId: 'example_${index}_image',
-                  isImage: true,
-                  previewUrl: example.imageAsset,
-                  onUpload: () => _pickAndUpload(
-                    fieldId: 'example_${index}_image',
-                    isImage: true,
-                    exampleIndex: index,
-                  ),
-                  onClear: () => setState(() => _examples[index] = example.copyWith(imageAsset: '')),
-                ),
-              ),
-            ],
+          _buildMediaPicker(
+            label: 'Flashcard Audio',
+            fieldId: 'example_${index}_audio',
+            isImage: false,
+            previewUrl: example.audioAsset,
+            onUpload: () => _pickAndUpload(
+              fieldId: 'example_${index}_audio',
+              isImage: false,
+              exampleIndex: index,
+            ),
+            onClear: () => setState(() => _examples[index] = example.copyWith(audioAsset: '')),
+          ),
+          AppSpacing.verticalM,
+          _buildMediaPicker(
+            label: 'Flashcard Image',
+            fieldId: 'example_${index}_image',
+            isImage: true,
+            previewUrl: example.imageAsset,
+            onUpload: () => _pickAndUpload(
+              fieldId: 'example_${index}_image',
+              isImage: true,
+              exampleIndex: index,
+            ),
+            onClear: () => setState(() => _examples[index] = example.copyWith(imageAsset: '')),
           ),
         ],
       ),
     );
   }
+
 
   Widget _buildTextField({
     TextEditingController? controller,
@@ -601,8 +618,9 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
     required VoidCallback onClear,
   }) {
     final bool isUploading = _uploadingFields[fieldId] ?? false;
-    final bool hasPreview = previewUrl != null && previewUrl.isNotEmpty && previewUrl.startsWith('http');
+    final bool hasPreview = previewUrl != null && previewUrl.isNotEmpty;
     final bool isPlaying = !isImage && _currentlyPlayingUrl == previewUrl;
+    final bool isAsset = hasPreview && previewUrl.startsWith('assets/');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -666,7 +684,12 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(12),
-                                  image: DecorationImage(image: NetworkImage(previewUrl), fit: BoxFit.cover),
+                                  image: DecorationImage(
+                                    image: isAsset 
+                                        ? AssetImage(previewUrl) as ImageProvider
+                                        : NetworkImage(previewUrl), 
+                                    fit: BoxFit.cover
+                                  ),
                                 ),
                               ),
                               Positioned(
@@ -697,12 +720,14 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                                 ),
                               ),
                               AppSpacing.horizontalM,
-                              const Expanded(
+                              Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Audio Ready', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                                    Text('Click play to preview', style: TextStyle(fontSize: 11, color: AppColors.textMedium)),
+                                    Text(isAsset ? 'Local Asset' : 'Cloud Audio', 
+                                         style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                                    Text(isAsset ? 'Fixed local file' : 'Click play to preview', 
+                                         style: const TextStyle(fontSize: 11, color: AppColors.textMedium)),
                                   ],
                                 ),
                               ),
@@ -715,8 +740,9 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
                         AppSpacing.verticalM,
                         OutlinedButton.icon(
                           onPressed: onUpload,
-                          icon: const Icon(Icons.sync_rounded, size: 16),
-                          label: Text('Change ${isImage ? 'Image' : 'Audio'}', style: const TextStyle(fontSize: 12)),
+                          icon: Icon(isAsset ? Icons.cloud_upload_rounded : Icons.sync_rounded, size: 16),
+                          label: Text('${isAsset ? 'Migrate to Cloud' : 'Change ${isImage ? 'Image' : 'Audio'}'}', 
+                                       style: const TextStyle(fontSize: 12)),
                           style: OutlinedButton.styleFrom(
                             minimumSize: const Size(double.infinity, 36),
                             side: BorderSide(color: AppColors.primary.withValues(alpha: 0.4)),
@@ -729,6 +755,7 @@ class _UnitEditScreenState extends State<UnitEditScreen> {
       ],
     );
   }
+
 
 
 
