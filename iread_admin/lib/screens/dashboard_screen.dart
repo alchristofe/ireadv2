@@ -8,6 +8,9 @@ import '../core/widgets/responsive_layout.dart';
 import 'package:rive/rive.dart' hide Image;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'login_screen.dart';
+import 'settings_screen.dart';
+
+enum SidebarView { units, settings }
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -18,6 +21,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   LanguageType _selectedLanguage = LanguageType.english;
+  SidebarView _currentView = SidebarView.units;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -33,8 +37,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
               backgroundColor: AppColors.surface,
               child: _AdminSidebar(
                 selectedLanguage: _selectedLanguage,
+                currentView: _currentView,
                 onLanguageSelected: (type) {
-                  setState(() => _selectedLanguage = type);
+                  setState(() {
+                    _selectedLanguage = type;
+                    _currentView = SidebarView.units;
+                  });
+                  _scaffoldKey.currentState?.closeDrawer();
+                },
+                onViewSelected: (view) {
+                  setState(() => _currentView = view);
                   _scaffoldKey.currentState?.closeDrawer();
                 },
               ),
@@ -46,30 +58,53 @@ class _DashboardScreenState extends State<DashboardScreen> {
           if (!isMobileOrTablet)
             _AdminSidebar(
               selectedLanguage: _selectedLanguage,
-              onLanguageSelected: (type) => setState(() => _selectedLanguage = type),
+              currentView: _currentView,
+              onLanguageSelected: (type) {
+                setState(() {
+                  _selectedLanguage = type;
+                  _currentView = SidebarView.units;
+                });
+              },
+              onViewSelected: (view) => setState(() => _currentView = view),
             ),
           
           // Main Content
           Expanded(
-            child: UnitsListScreen(
-              language: _selectedLanguage,
-              isMobile: isMobileOrTablet,
-              onMenuPressed: isMobileOrTablet ? () => _scaffoldKey.currentState?.openDrawer() : null,
-            ),
+            child: _buildMainContent(isMobileOrTablet),
           ),
         ],
       ),
     );
   }
+
+  Widget _buildMainContent(bool isMobile) {
+    switch (_currentView) {
+      case SidebarView.units:
+        return UnitsListScreen(
+          language: _selectedLanguage,
+          isMobile: isMobile,
+          onMenuPressed: isMobile ? () => _scaffoldKey.currentState?.openDrawer() : null,
+        );
+      case SidebarView.settings:
+        return SettingsScreen(
+          isMobile: isMobile,
+          onMenuPressed: isMobile ? () => _scaffoldKey.currentState?.openDrawer() : null,
+        );
+    }
+  }
 }
 
 class _AdminSidebar extends StatelessWidget {
   final LanguageType selectedLanguage;
+  final SidebarView currentView;
   final Function(LanguageType) onLanguageSelected;
+  final Function(SidebarView) onViewSelected;
 
   const _AdminSidebar({
     required this.selectedLanguage,
+    required this.currentView,
     required this.onLanguageSelected,
+    required this.onViewSelected,
   });
 
   @override
@@ -151,8 +186,20 @@ class _AdminSidebar extends StatelessWidget {
                 
                 AppSpacing.verticalXL,
                 _buildSectionHeader(context, 'SYSTEM'),
-                _buildNavTile(context, 'Settings', Icons.settings_outlined, () {}),
-                _buildNavTile(context, 'Activity Logs', Icons.history_rounded, () {}),
+                _buildNavTile(
+                  context, 
+                  'Settings', 
+                  Icons.settings_outlined, 
+                  () => onViewSelected(SidebarView.settings),
+                  isSelected: currentView == SidebarView.settings,
+                ),
+                _buildNavTile(
+                  context, 
+                  'Activity Logs', 
+                  Icons.history_rounded, 
+                  () {},
+                  badgeText: 'COMING SOON',
+                ),
               ],
             ),
           ),
@@ -227,7 +274,7 @@ class _AdminSidebar extends StatelessWidget {
   }
 
   Widget _buildLanguageTile(BuildContext context, LanguageType type, String title, IconData icon) {
-    final isSelected = selectedLanguage == type;
+    final isSelected = currentView == SidebarView.units && selectedLanguage == type;
     
     return _buildNavTile(
       context, 
@@ -238,7 +285,7 @@ class _AdminSidebar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavTile(BuildContext context, String title, IconData icon, VoidCallback onTap, {bool isSelected = false}) {
+  Widget _buildNavTile(BuildContext context, String title, IconData icon, VoidCallback onTap, {bool isSelected = false, String? badgeText}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 4),
       child: ListTile(
@@ -251,13 +298,36 @@ class _AdminSidebar extends StatelessWidget {
           size: 20,
           color: isSelected ? AppColors.primary : AppColors.textMedium,
         ),
-        title: Text(
-          title,
-          style: AppTextStyles.bodyMedium(context).copyWith(
-            color: isSelected ? AppColors.primary : AppColors.textMedium,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-            fontSize: 14,
-          ),
+        title: Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: AppTextStyles.bodyMedium(context).copyWith(
+                  color: isSelected ? AppColors.primary : AppColors.textMedium,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+            if (badgeText != null)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  badgeText,
+                  style: AppTextStyles.label(context).copyWith(
+                    color: AppColors.primary,
+                    fontSize: 8,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+          ],
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.m),
       ),
